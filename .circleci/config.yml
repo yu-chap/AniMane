@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  # build ジョブ: CircleCI 上で Docker コンテナを作成してテストする
+  build:
+    docker:
+      - image: circleci/php:8.0-node-browsers
+      - image: circleci/mysql:8.0
+    environment:
+      - DB_CONNECTION: circle_testing
+    working_directory: ~/CI-test
+    steps:
+      - checkout
+      - run:
+          name: Update apt-get
+          command: sudo apt-get update
+      - run:
+          name: Docker php extensions install
+          command: sudo docker-php-ext-install pdo_mysql
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "src/composer.json" }}
+            - v1-dependencies-
+      - run:
+          name: Install PHP libraries
+          working_directory: src
+          command: composer install -n --prefer-dist
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "src/composer.json" }}
+      - run:
+          name: Run PHPUnit
+          working_directory: src
+          command: vendor/bin/phpunit
+
+workflows:
+  version: 2
+  builid_workflow:
+    jobs:
+      - build

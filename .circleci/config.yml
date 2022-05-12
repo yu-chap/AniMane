@@ -33,8 +33,27 @@ jobs:
           working_directory: src
           command: vendor/bin/phpunit
 
+    # deploy ジョブ: EC2 に SSH 接続して、デプロイを実行する
+    deploy:
+        machine:
+            image: circleci/classic:edge
+        steps:
+            - checkout
+            # CircleCI に登録した秘密鍵を呼び出す
+            - add_ssh_keys:
+            # CircleCI に登録した環境変数を使って SSH
+            - run: ssh ${USER_NAME}@${HOST_NAME} 'cd ${PROJECT_PATH} && git pull'
+
+# push 後にテストを実行する
+# main ブランチにpushされた場合はその後にデプロイを実行する
 workflows:
   version: 2
   builid_workflow:
     jobs:
       - build
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only: main

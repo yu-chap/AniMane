@@ -44,7 +44,8 @@ jobs:
               fingerprints:
                 - "${KEY_FINGERPRINT}"
           # CircleCI に登録した環境変数を使って SSH
-          - run: ssh -o StrictHostKeyChecking=no ${USER_NAME}@${HOST_NAME} 'cd ${PROJECT_PATH} && git pull'
+          - run: ssh ${USER_NAME}@${HOST_NAME}
+          #  'cd ${PROJECT_PATH} && git pull'
 
 # push 後にテストを実行する
 # main ブランチにpushされた場合はその後にデプロイを実行する

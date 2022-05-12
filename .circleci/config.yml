@@ -47,13 +47,13 @@ jobs:
 # push 後にテストを実行する
 # main ブランチにpushされた場合はその後にデプロイを実行する
 workflows:
-  version: 2
-  builid_workflow:
-    jobs:
-      - build
-      - deploy:
-          requires:
+    version: 2
+    build_and_deploy:
+        jobs:
             - build
-          filters:
-            branches:
-              only: main
+            - deploy:
+                requires:
+                    - build
+                filters:
+                    branches:
+                        only: master

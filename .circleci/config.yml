@@ -36,7 +36,7 @@ jobs:
   # deploy ジョブ: EC2 に SSH 接続して、デプロイを実行する
   deploy:
       machine:
-          image: circleci/classic:edge
+          image: ubuntu-2004:202008-01
       steps:
           - checkout
           # CircleCI に登録した秘密鍵を呼び出す

@@ -44,7 +44,7 @@ jobs:
               fingerprints:
                 - "${KEY_FINGERPRINT}"
           # CircleCI に登録した環境変数を使って SSH
-          - run: ssh ${USER_NAME}@${HOST_NAME} 'cd ~/var/www/AniMane/ && ls -a'
+          - run: ssh ${USER_NAME}@${HOST_NAME} 'cd ~/var/www/AniMane/ && git pull'
 
 # push 後にテストを実行する
 # main ブランチにpushされた場合はその後にデプロイを実行する

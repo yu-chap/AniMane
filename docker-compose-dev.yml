@@ -42,7 +42,7 @@ services:
       - PMA_USER=root
       - PMA_PASSWORD=password
     links:
-      - mysql
+      - db
     ports:
       - 4040:80
     volumes:

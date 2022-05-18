@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use app\Http\Controllers\Auth;
-
+use App\Http\Controllers\PageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,15 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('hello');
-})->name('hello');
-
-// Auth::routes();
+Route::get('/', [PageController::class, 'TopPage_Routing'])->name('top');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/app/{any}', function() {
+        return view('/app/app');
+    })->where('any', '.*');
+});

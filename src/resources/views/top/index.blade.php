@@ -5,4 +5,4 @@
   <br><br>
   <a href="{{ route('login') }}">ログイン</a>
   <br><br>
-  @endsection
+@endsection

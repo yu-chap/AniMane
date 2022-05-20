@@ -7,7 +7,7 @@
         <h1 class="display-1 text-center text-warning">AniMane</h1>
       </div>
       <div class="d-flex align-items-start justify-content-center h-25">
-        <p class="h5 text-center text-warning text-opacity-25">-アニメ管理アプリ-</p>
+        <p class="h5 text-center text-warning text-opacity-25">-Make your life more fun with anime-</p>
       </div>
   <div class="container-fluid h-25">
     <div class="row align-items-center justify-content-center h-100">

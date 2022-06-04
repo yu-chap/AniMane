@@ -6,12 +6,12 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 // 入力のクリアボタン //
 // ボタンを押すと入力内容がクリアされる
-const ClearButton = ({ title, handleRefresh }) => {
+const ClearButton = ({ title, handleRefresh, fontSize }) => {
     return (
         <Box>
             <Tooltip title={ title } placeholder="bottom">
                 <IconButton onClick={ handleRefresh }>
-                    <ClearIcon fontSize="small" />
+                    <ClearIcon fontSize={ fontSize } />
                 </IconButton>
             </Tooltip>
         </Box>

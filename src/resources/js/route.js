@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
 import Home from './pages/Home';
+import Folder from './pages/Folder';
 import NavBar from './components/NavBar/NavBar';
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
             <NavBar />
             <Routes>
                 <Route path='/app/home' element={ <Home /> } />
+                <Route path='/app/home/folders/:folderId/items' element={ <Folder /> } />
             </Routes>
         </div>
     );

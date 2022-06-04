@@ -30,7 +30,7 @@ const EditDialog = ({ task_name, id, label, open, error, errorText, handleChange
                         error={ error }
                         onChange={ handleChange }
                         value={ value }
-                        InputProps={{ endAdornment: (value === "") ? null : <ClearButton title="入力のクリア" handleRefresh={ handleRefresh } /> }}
+                        InputProps={{ endAdornment: (value === "") ? null : <ClearButton title="入力のクリア" handleRefresh={ handleRefresh } fontSize="small" /> }}
                     />
                 </DialogContent>
                 <DialogActions>

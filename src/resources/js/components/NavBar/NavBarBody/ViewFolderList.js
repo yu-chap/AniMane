@@ -1,39 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { FixedSizeList } from 'react-window';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Typography from '@mui/material/Typography';
 import FolderIcon from '@mui/icons-material/Folder';
 import EditFolder from './EditFolder';
 import DeleteFolder from './DeleteFolder';
-import { yellow } from '@mui/material/colors';
-
-
-// 画面のwidthとheightを取得する関数 //
-const useWindowDimensions = () => {
-    const getWindowDimensions = () => {
-        const { innerWidth: width, innerHeight: height } = window;
-        return {
-            width,
-            height
-        };
-    }
-
-    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-        useEffect(() => {
-            const onResize = () => {
-                setWindowDimensions(getWindowDimensions());
-            }
-            window.addEventListener('resize', onResize);
-            return () => window.removeEventListener('resize', onResize);
-        }, []);
-    return windowDimensions;
-}
+import { grey, yellow } from '@mui/material/colors';
+import useWindowDimensions from '../../common/useWindowDimensions';
 
 // フォルダ一覧を表示するコンポーネント //
-const ViewFolderList = ({ items, NavBarWidth, handleReload }) => {
+const ViewFolderList = ({ folders, NavBarWidth, handleReload }) => {
     const { _, height } = useWindowDimensions();
     const NavBarBody_h = height - 290;  // headerとfooterのheightを引いた残りの高さ
 
@@ -46,13 +27,13 @@ const ViewFolderList = ({ items, NavBarWidth, handleReload }) => {
                 disablePadding
                 secondaryAction={
                     <ListItemIcon>
-                        <EditFolder folder_key={ items[index].key } handleReload={ handleReload } />
-                        <DeleteFolder folder_key={ items[index].key } handleReload={ handleReload } />
+                        <EditFolder folder_key={ folders[index].key } handleReload={ handleReload } />
+                        <DeleteFolder folder_key={ folders[index].key } handleReload={ handleReload } />
                     </ListItemIcon>
                 }
             >
-                <Tooltip title={ items[index].name } placement="bottom-end">
-                <ListItemButton>
+                <Tooltip title={ folders[index].name } placement="bottom-end">
+                <ListItemButton component={ Link } to={ "/app/home/folders/" + folders[index].key + "/items" } sx={{ "&:hover": { color: grey[900] } }}>
                     <ListItemIcon>
                         <FolderIcon />
                     </ListItemIcon>
@@ -63,7 +44,7 @@ const ViewFolderList = ({ items, NavBarWidth, handleReload }) => {
                         fontSize={ 15 }
                         width={ NavBarWidth - 170 }
                     >
-                        { items[index].name }
+                        { folders[index].name }
                     </Box>
                 </ListItemButton>
                 </Tooltip>
@@ -71,17 +52,33 @@ const ViewFolderList = ({ items, NavBarWidth, handleReload }) => {
         );
     };
 
-    return (
-        <Box sx={{ width: NavBarWidth, height: NavBarBody_h, position: "fixed", bgcolor: yellow[100], top: 230, left: "0%" }}>
+    const FolderList = () => {
+        return (
             <FixedSizeList
                 height={ NavBarBody_h }
                 width={ NavBarWidth }
                 itemSize={ 50 }
-                itemCount={ items.length }
+                itemCount={ folders.length }
                 overscanCount={ 5 }
             >
                 { renderRow }
             </FixedSizeList>
+        );
+    }
+
+    const NotExistFolders = () => {
+        return (
+            <Box sx={{ width: NavBarWidth, height: NavBarBody_h, display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Typography fontWeight="bold">
+                    該当するフォルダーが存在しません
+                </Typography>
+            </Box>
+        );
+    }
+
+    return (
+        <Box sx={{ width: NavBarWidth, height: NavBarBody_h, position: "fixed", bgcolor: yellow[100], top: 230, left: "0%" }}>
+            { (folders.length) ? <FolderList /> : <NotExistFolders /> }
         </Box>
     );
 }

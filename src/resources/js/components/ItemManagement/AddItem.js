@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import AddButton from '../../common/AddButton';
-import { grey, yellow } from '@mui/material/colors';
+import AddIconButton from '../common/AddIconButton';
 
-// フォルダ追加機能 //
-// フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
-// 閉じるまたは追加ボタンを押すと新しいフォルダ作成のキャンセルまたは新しいフォルダ作成が完了する
+// アイテム追加機能 //
+// アイテムの追加ボタンを押すと新しいアイテムを作成する画面が表示され
+// 閉じるまたは追加ボタンを押すと新しいアイテム作成のキャンセルまたは新しいアイテム作成が完了する
 // 入力は1字以上100字以下(数字, アルファベット, _)で制限する
-const AddFolder = ({ NavBarWidth, handleReload }) => {
+const AddItem = ({ handleReload }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [value, setValue] = useState("");
@@ -75,26 +73,23 @@ const AddFolder = ({ NavBarWidth, handleReload }) => {
 
     return (
         <Box>
-            <AddButton
-                startIcon={ <CreateNewFolderIcon /> }
-                button_name="フォルダの追加"
-                task_name="新しいフォルダの作成"
-                id="new_folder_name"
-                label="新しいフォルダ名"
-                open={ open }
-                error={ error }
-                errorText={ errorText }
-                handleClickOpen={ handleClickOpen }
-                handleChange={ handleChange }
-                handleClose={ handleClose }
-                handleSubmit={ handleSubmit }
-                handleRefresh={ handleRefresh }
-                value={ value }
-                submit_button_name="追加"
-                sx={{ width: NavBarWidth, height: 50, bgcolor: yellow[300], top: 180, left: "0%", position: "fixed", fontSize: 18, color: grey[900] }}
-            />
+            <AddIconButton
+                    task_name="新しいアニメの作成"
+                    id="new_item_name"
+                    label="新しいアニメ名"
+                    open={ open }
+                    error={ error }
+                    errorText={ errorText }
+                    handleClickOpen={ handleClickOpen }
+                    handleChange={ handleChange }
+                    handleClose={ handleClose }
+                    handleSubmit={ handleSubmit }
+                    handleRefresh={ handleRefresh }
+                    value={ value }
+                    submit_button_name="追加"
+                />
         </Box>
     );
 }
 
-export default AddFolder;
+export default AddItem;

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import AddButton from '../../common/AddButton';
-import { grey, yellow } from '@mui/material/colors';
+import EditButton from '../common/EditButton';
 
-// フォルダ追加機能 //
-// フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
-// 閉じるまたは追加ボタンを押すと新しいフォルダ作成のキャンセルまたは新しいフォルダ作成が完了する
+// アイテム編集機能 //
+// アイテムの編集ボタンを押すとアイテムを編集する画面が表示され
+// 閉じるまたは編集ボタンを押すとアイテム編集のキャンセルまたはアイテム編集が完了する
 // 入力は1字以上100字以下(数字, アルファベット, _)で制限する
-const AddFolder = ({ NavBarWidth, handleReload }) => {
+// @item_key: 編集するアイテムのkey
+const EditItem = ({ item_key, handleReload }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [value, setValue] = useState("");
@@ -65,7 +64,7 @@ const AddFolder = ({ NavBarWidth, handleReload }) => {
     const handleSubmit = () => {
         if(value_validation(value)) {
             handleClose();
-            console.log(value);
+            console.log(`Item Name: ${value}, its key is ${item_key}`);
             handleReload();
         }
         else {
@@ -75,12 +74,10 @@ const AddFolder = ({ NavBarWidth, handleReload }) => {
 
     return (
         <Box>
-            <AddButton
-                startIcon={ <CreateNewFolderIcon /> }
-                button_name="フォルダの追加"
-                task_name="新しいフォルダの作成"
-                id="new_folder_name"
-                label="新しいフォルダ名"
+            <EditButton
+                task_name="アニメの編集"
+                id="edit item"
+                label="新しいアニメ名"
                 open={ open }
                 error={ error }
                 errorText={ errorText }
@@ -90,11 +87,12 @@ const AddFolder = ({ NavBarWidth, handleReload }) => {
                 handleSubmit={ handleSubmit }
                 handleRefresh={ handleRefresh }
                 value={ value }
-                submit_button_name="追加"
-                sx={{ width: NavBarWidth, height: 50, bgcolor: yellow[300], top: 180, left: "0%", position: "fixed", fontSize: 18, color: grey[900] }}
+                submit_button_name="完了"
+                aria_label="edit_item"
+                size="small"
             />
         </Box>
     );
 }
 
-export default AddFolder;
+export default EditItem;

@@ -1,36 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import { grey, yellow } from '@mui/material/colors';
-import SearchIcon from '@mui/icons-material/Search';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import AddFolder from './AddFolder';
 import ViewFolderList from './ViewFolderList';
-import ClearButton from '../../common/ClearButton';
-
-// フォルダ検索バー //
-const FolderSearchBar = ({ NavBarWidth, handleReRender, handleChange, handleRefresh, handleReload, value }) => {
-    const SearchBarWidth = NavBarWidth - 50;
-    return (
-        <Box sx={{ width: NavBarWidth, height: 60, justifyContent: "center", alignItems: "start", display: "flex", bgcolor: yellow[600], top: 120, left: "0%", position: "fixed" }}>
-            <Paper sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: SearchBarWidth }}>
-                {/* <Tooltip title="フォルダの検索" placement="bottom"><IconButton onClick={ handleReRender }><SearchIcon fontSize="small" /></IconButton></Tooltip> */}
-                <IconButton disabled><SearchIcon fontSize="small" /></IconButton>
-                <InputBase
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="フォルダの検索"
-                    value={ value }
-                    onChange={ handleChange }
-                />
-                { (value === "") ? null : <ClearButton title="検索のクリア" handleRefresh={ handleRefresh } fontSize="small"/> }
-                <Tooltip title="フォルダの再読み込み" placement="bottom"><IconButton onClick={ handleReload }><RefreshIcon fontSize="small" /></IconButton></Tooltip>
-            </Paper>
-        </Box>
-    );
-}
+import FolderSearchBar from './FolderSearchBar';
 
 // Navgation BarのBody部分 //
 // - フォルダ一覧表示機能
@@ -48,6 +20,8 @@ const NavBarBody = ({ NavBarWidth }) => {
     const [folders, setFolders] = useState([]);
     const [value, setValue] = useState("");
     const [reRender, setReRender] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const isMoutedRef = useRef(false);
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -67,16 +41,36 @@ const NavBarBody = ({ NavBarWidth }) => {
         console.log("Refreshed folders");
     }
 
+    const SleepByPromiss = (sec) => {
+        return new Promise(resolve => setTimeout(resolve, sec*1000));
+    }
+
+    const items_fetch = async () => {
+            setIsLoading(true);
+            await SleepByPromiss(5);
+        if(isMoutedRef.current) {
+            setFolders(all_folders);
+            setIsLoading(false);
+            setReRender(false);
+            console.log("ReRendered Folders");
+        }
+    }
+
+    useEffect(() => {
+        isMoutedRef.current = true;
+        return () => {
+            isMoutedRef.current = false;
+        }
+    }, [])
+
     useEffect(() => {
         if(reRender) {
-            console.log("ReRendered Folders");
-            setFolders(all_folders);
-            setReRender(false);
+            items_fetch();
         }
     }, [reRender])
 
     useEffect(() => {
-        if(!reRender) {
+        if(!reRender && !isLoading) {
             const filtered_folders = all_folders.filter((folder) => folder.name.toLowerCase().includes(value.toLowerCase()));
             setFolders(filtered_folders);
             console.log("Search");
@@ -88,7 +82,6 @@ const NavBarBody = ({ NavBarWidth }) => {
             {/* フォルダ検索部分 */}
             <FolderSearchBar
                 NavBarWidth={ NavBarWidth }
-                handleReRender={ handleReRender }
                 handleChange={ handleChange }
                 handleRefresh={ handleRefresh }
                 handleReload={ handleReload }
@@ -96,10 +89,18 @@ const NavBarBody = ({ NavBarWidth }) => {
             />
 
             {/* フォルダ追加部分 */}
-            <AddFolder NavBarWidth={ NavBarWidth } handleReload={ handleReload } />
+            <AddFolder
+                NavBarWidth={ NavBarWidth }
+                handleReload={ handleReload }
+            />
 
             {/* フォルダ一覧部分 */}
-            <ViewFolderList folders={ folders } NavBarWidth={ NavBarWidth } handleReload={ handleReload } />
+            <ViewFolderList
+                folders={ folders }
+                NavBarWidth={ NavBarWidth }
+                handleReload={ handleReload }
+                isLoading={ isLoading }
+            />
         </Box>
     );
 }

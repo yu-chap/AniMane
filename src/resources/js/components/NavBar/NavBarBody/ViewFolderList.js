@@ -10,11 +10,12 @@ import Typography from '@mui/material/Typography';
 import FolderIcon from '@mui/icons-material/Folder';
 import EditFolder from './EditFolder';
 import DeleteFolder from './DeleteFolder';
+import LoadingIcon from '../../common/LoadingIcon';
 import { grey, yellow } from '@mui/material/colors';
 import useWindowDimensions from '../../common/useWindowDimensions';
 
 // フォルダ一覧を表示するコンポーネント //
-const ViewFolderList = ({ folders, NavBarWidth, handleReload }) => {
+const ViewFolderList = ({ folders, NavBarWidth, handleReload, isLoading }) => {
     const { _, height } = useWindowDimensions();
     const NavBarBody_h = height - 290;  // headerとfooterのheightを引いた残りの高さ
 
@@ -76,9 +77,21 @@ const ViewFolderList = ({ folders, NavBarWidth, handleReload }) => {
         );
     }
 
+    const Main = () => {
+        return (
+            <Box>
+                { (folders.length) ? <FolderList /> : <NotExistFolders /> }
+            </Box>
+        );
+    }
+
     return (
         <Box sx={{ width: NavBarWidth, height: NavBarBody_h, position: "fixed", bgcolor: yellow[100], top: 230, left: "0%" }}>
-            { (folders.length) ? <FolderList /> : <NotExistFolders /> }
+            {
+                (isLoading) ?
+                <LoadingIcon sx={{ width: NavBarWidth, height: NavBarBody_h, display: "flex", justifyContent: "center", alignItems: "center" }}/> :
+                <Main />
+            }
         </Box>
     );
 }

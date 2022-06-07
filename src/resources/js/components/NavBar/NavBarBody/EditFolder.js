@@ -12,10 +12,9 @@ const EditFolder = ({ folder_key, handleReload }) => {
     const [error, setError] = useState(false);
     const [value, setValue] = useState("");
     const [errorText, setErrorText] = useState();
-    const errorMessage = "1字以上100字以下(数字, アルファベット, _)で記入してください。";
+    const errorMessage = "1字以上100字以下で記入してください。";
     const inputProps = {
         maxLength: 100,
-        pattern: "^[a-zA-Z0-9_]+$",
     };
 
     const handleErrorRefresh = () => {
@@ -44,7 +43,7 @@ const EditFolder = ({ folder_key, handleReload }) => {
     };
 
     const value_validation = (target_value) => {
-        if(target_value.length <= inputProps.maxLength && target_value.match(inputProps.pattern) && target_value.length > 0) {
+        if(target_value.length <= inputProps.maxLength && target_value.length > 0) {
             return true;
         }
         else {

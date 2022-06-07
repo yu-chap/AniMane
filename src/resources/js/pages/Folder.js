@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import ItemManagement from '../components/ItemManagement/ItemManagement';
 
 // /app/home/:folderId/itemsの画面へ出力する要素 //
@@ -10,7 +9,7 @@ const Folder = () => {
     const { folderId } = useParams();
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box key={ folderId } sx={{ display: "flex", justifyContent: "center" }}>
             <ItemManagement folderId={ folderId } />
         </Box>
     );

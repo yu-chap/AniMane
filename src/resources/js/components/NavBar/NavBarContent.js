@@ -4,12 +4,12 @@ import NavBarHead from './Header';
 import NavBarFoot from './Footer';
 import NavBarBody from './NavBarBody/NavBarBody';
 
-const NavBarContent = ({ NavBarWidth }) => {
+const NavBarContent = () => {
     return (
         <Box>
-            <NavBarHead NavBarWidth={ NavBarWidth } />
-            <NavBarBody NavBarWidth={ NavBarWidth } />
-            <NavBarFoot NavBarWidth={ NavBarWidth }/>
+            <NavBarHead />
+            <NavBarBody />
+            <NavBarFoot />
         </Box>
     );
 }

@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import SortIcon from '@mui/icons-material/Sort';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { SortContext } from '../../common/SortManagement';
 
 const options = [
+    "作成順",
+    "最新順",
     "タイトル順",
-    "逆タイトル順",
-    "作成日順",
-    "最新",
 ];
 
-const SortItem = ({ handleSort }) => {
+const SortItem = ({ isLoading }) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const [state, dispatch] = useContext(SortContext);
 
     const handleClick = (e) => {
         setAnchorEl(e.currentTarget);
@@ -26,8 +27,9 @@ const SortItem = ({ handleSort }) => {
     };
 
     const handleSortIndex = (index) => {
-        handleSort(index);
         handleClose();
+        if(isLoading) { return; }
+        dispatch({ type: "setSortIndex", payload: index });
     }
 
     return (
@@ -57,6 +59,7 @@ const SortItem = ({ handleSort }) => {
                     return (
                         <MenuItem
                             key={ index }
+                            selected={ index === state.sortIndex }
                             onClick={ () => { handleSortIndex(index); } }
                         >
                             { option }

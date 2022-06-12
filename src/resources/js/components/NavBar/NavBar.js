@@ -7,7 +7,7 @@ import NavBarContent from './NavBarContent';
 import { grey } from '@mui/material/colors';
 
 // Width of Navgation Bar //
-const NavBarWidth = 300;
+export const NAV_BAR_WIDTH = 300;
 
 // Drwaerの表示制御 //
 // メニューボタンを押すとNavigation Contentを表示し
@@ -28,10 +28,10 @@ const DrawerHandleButton = ({ onClick, sx, color }) => {
 const DrawerContent = ({ onClick }) => {
     return (
         <Box
-            sx={{ width: NavBarWidth }}
+            sx={{ width: NAV_BAR_WIDTH }}
             role="presentation"
         >
-            <NavBarContent NavBarWidth={ NavBarWidth } />
+            <NavBarContent />
             <DrawerHandleButton
                 onClick={ onClick }
                 sx={{ position: "absolute", right: "0%", top: "0%" }}

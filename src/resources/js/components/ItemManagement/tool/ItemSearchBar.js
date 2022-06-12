@@ -6,33 +6,17 @@ import InputBase from '@mui/material/InputBase';
 import Tooltip from '@mui/material/Tooltip';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import ClearButton from '../common/ClearButton';
-
-// SearchBarWidthを決定する関数 //
-// minWidthを280, maxWidthを1100とし
-// それ以外はBoxWidth-100とする
-const getSearchBarWidth = (BoxWidth) => {
-    const SearchBarWidth = BoxWidth - 100;
-    if(SearchBarWidth > 1100) {
-        return 1100;
-    }
-    else if(SearchBarWidth < 280) {
-        return 280;
-    }
-    else {
-        return SearchBarWidth;
-    }
-}
+import ClearButton from '../../common/ClearButton';
+import { getBoxWidth, getSearchBarWidth } from './tool';
 
 // フォルダ内アイテム検索バー //
-const ItemSearchBar = ({ BoxWidth, handleChange, handleRefresh, handleReload, value }) => {
-    const SearchBarWidth = getSearchBarWidth(BoxWidth);
+const ItemSearchBar = ({ handleChange, handleRefresh, handleReload, handleSubmit, value }) => {
+    const BoxWidth = getBoxWidth();
+    const SearchBarWidth = getSearchBarWidth();
     return (
         <Box sx={{ position: "fixed", display: "flex", justifyContent: "center", height: 100, width: BoxWidth }}>
             <Paper elevation={ 24 } sx={{ margin: "20px auto", display: "flex", alignItems: "center", width: SearchBarWidth }}>
-                <IconButton disabled>
-                    <SearchIcon />
-                </IconButton>
+                <Tooltip title="検索"><IconButton onClick={ handleSubmit }><SearchIcon /></IconButton></Tooltip>
                 <InputBase
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="フォルダ内検索"

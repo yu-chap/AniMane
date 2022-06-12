@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import AddButton from '../../common/AddButton';
+import AddButton from '../../../common/AddButton';
+import { NoticeContext } from '../../../common/Notification';
 import { grey, yellow } from '@mui/material/colors';
+import axios from 'axios';
+import { NAV_BAR_WIDTH } from '../../NavBar';
 
 // フォルダ追加機能 //
 // フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
 // 閉じるまたは追加ボタンを押すと新しいフォルダ作成のキャンセルまたは新しいフォルダ作成が完了する
-// 入力は1字以上100字以下(数字, アルファベット, _)で制限する
-const AddFolder = ({ NavBarWidth, handleReload }) => {
+// 入力は1字以上200字以下で制限する
+const AddFolder = ({ handleReload }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [value, setValue] = useState("");
     const [errorText, setErrorText] = useState();
-    const errorMessage = "1字以上100字以下で記入してください。";
+    const [state, dispatch] = useContext(NoticeContext);
+    const errorMessage = "1字以上200字以下で記入してください。";
     const inputProps = {
-        maxLength: 100,
+        maxLength: 200,
     };
 
     const handleErrorRefresh = () => {
@@ -44,6 +48,7 @@ const AddFolder = ({ NavBarWidth, handleReload }) => {
     };
 
     const value_validation = (target_value) => {
+        target_value = target_value.trim();
         if(target_value.length <= inputProps.maxLength && target_value.length > 0) {
             return true;
         }
@@ -62,16 +67,53 @@ const AddFolder = ({ NavBarWidth, handleReload }) => {
         }
     };
 
+    const loadAfterAction = (payload) => {
+        dispatch({ type: 'update_message', payload: payload });
+        dispatch({ type: 'handleNoticeOpen' });
+        handleReload();
+    }
+
+    const createFolder = () => {
+        const abortCtrl = new AbortController()
+        const timeout = setTimeout(() => { abortCtrl.abort() }, 10000);
+        axios
+            .post('/api/folders', { name: value.trim() }, { signal: abortCtrl.signal })
+            .then(() => {
+                console.log("Success");
+                console.log(value.trim());
+                loadAfterAction("フォルダの作成が完了しました");
+            })
+            .catch(() => {
+                console.log("Fail to submit");
+                loadAfterAction("フォルダの作成に失敗しました");
+            })
+            .finally(() => {
+                clearTimeout(timeout);
+            })
+    }
+
     const handleSubmit = () => {
         if(value_validation(value)) {
+            createFolder();
             handleClose();
-            console.log(value);
-            handleReload();
         }
         else {
             handleError(errorMessage);
         }
     }
+
+    const AddButton_sx = {
+        width: NAV_BAR_WIDTH,
+        height: 50,
+        bgcolor: yellow[300],
+        top: 180,
+        left: "0%",
+        position: "fixed",
+        fontSize: 18,
+        fontWeight: "bold",
+        color: grey[900],
+        "&:hover": { bgcolor: yellow[800] },
+    };
 
     return (
         <Box>
@@ -91,7 +133,7 @@ const AddFolder = ({ NavBarWidth, handleReload }) => {
                 handleRefresh={ handleRefresh }
                 value={ value }
                 submit_button_name="追加"
-                sx={{ width: NavBarWidth, height: 50, bgcolor: yellow[300], top: 180, left: "0%", position: "fixed", fontSize: 18, color: grey[900] }}
+                sx={ AddButton_sx }
             />
         </Box>
     );

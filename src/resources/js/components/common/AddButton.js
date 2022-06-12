@@ -13,7 +13,7 @@ const AddButton = ({ startIcon, button_name, task_name, id, label, open, error, 
         <Box>
             <Button
                 startIcon={ startIcon }
-                component={ Typography }
+                // component={ Typography }
                 onClick={ handleClickOpen }
                 sx={ sx }
                 >

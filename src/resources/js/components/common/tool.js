@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 // 画面のwidthとheightを取得する関数 //
-const useWindowDimensions = () => {
+export const useWindowDimensions = () => {
     const getWindowDimensions = () => {
         const { innerWidth: width, innerHeight: height } = window;
         return {
@@ -21,4 +21,3 @@ const useWindowDimensions = () => {
     return windowDimensions;
 }
 
-export default useWindowDimensions;

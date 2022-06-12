@@ -7,14 +7,15 @@ import Tooltip from '@mui/material/Tooltip';
 import { yellow } from '@mui/material/colors';
 import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import ClearButton from '../../common/ClearButton';
+import ClearButton from '../../../common/ClearButton';
+import { NAV_BAR_WIDTH } from '../../NavBar';
 
 
 // フォルダ検索バー //
-const FolderSearchBar = ({ NavBarWidth, handleChange, handleRefresh, handleReload, value }) => {
-    const SearchBarWidth = NavBarWidth - 50;
+const FolderSearchBar = ({ handleChange, handleRefresh, handleReload, value }) => {
+    const SearchBarWidth = NAV_BAR_WIDTH - 50;
     return (
-        <Box sx={{ width: NavBarWidth, height: 60, justifyContent: "center", alignItems: "start", display: "flex", bgcolor: yellow[600], top: 120, left: "0%", position: "fixed" }}>
+        <Box sx={{ width: NAV_BAR_WIDTH, height: 60, justifyContent: "center", alignItems: "start", display: "flex", bgcolor: yellow[600], top: 120, left: "0%", position: "fixed" }}>
             <Paper sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: SearchBarWidth }}>
                 <IconButton disabled>
                     <SearchIcon fontSize="small" />

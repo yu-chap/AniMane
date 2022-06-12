@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Box from '@mui/material/Box';
-import EditButton from '../../common/EditButton';
+import EditButton from '../../../common/EditButton';
+import { NoticeContext } from '../../../common/Notification';
+import axios from 'axios';
 
 // フォルダ編集機能 //
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとフォルダ編集のキャンセルまたはフォルダ編集が完了する
-// 入力は1字以上100字以下(数字, アルファベット, _)で制限する
-// @folder_key: 編集するフォルダのkey
-const EditFolder = ({ folder_key, handleReload }) => {
+// 入力は1字以上100字以下で制限する
+const EditFolder = ({ folder, handleReload }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);
     const [value, setValue] = useState("");
     const [errorText, setErrorText] = useState();
-    const errorMessage = "1字以上100字以下で記入してください。";
+    const [state, dispatch] = useContext(NoticeContext);
+    const errorMessage = "1字以上200字以下で記入してください。";
     const inputProps = {
-        maxLength: 100,
+        maxLength: 200,
     };
 
     const handleErrorRefresh = () => {
@@ -43,6 +45,7 @@ const EditFolder = ({ folder_key, handleReload }) => {
     };
 
     const value_validation = (target_value) => {
+        target_value = target_value.trim();
         if(target_value.length <= inputProps.maxLength && target_value.length > 0) {
             return true;
         }
@@ -61,11 +64,35 @@ const EditFolder = ({ folder_key, handleReload }) => {
         }
     };
 
+    const loadAfterAction = (payload) => {
+        dispatch({ type: 'update_message', payload: payload });
+        dispatch({ type: 'handleNoticeOpen' });
+        handleReload();
+    }
+
+    const updateFolder = () => {
+        const abortCtrl = new AbortController()
+        const timeout = setTimeout(() => { abortCtrl.abort() }, 10000);
+        axios
+            .put(`/api/folders/${folder.id}`, { name: value.trim() }, { signal: abortCtrl.signal })
+            .then(() => {
+                console.log("Success");
+                console.log(value.trim());
+                loadAfterAction(`フォルダ(${folder.name})の更新が完了しました`);
+            })
+            .catch(() => {
+                console.log("Fail to submit");
+                loadAfterAction(`フォルダ(${folder.name})の更新に失敗しました`);
+            })
+            .finally(() => {
+                clearTimeout(timeout);
+            })
+    }
+
     const handleSubmit = () => {
         if(value_validation(value)) {
+            updateFolder();
             handleClose();
-            console.log(`Folder Name: ${value}, its key is ${folder_key}`);
-            handleReload();
         }
         else {
             handleError(errorMessage);

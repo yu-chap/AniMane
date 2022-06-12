@@ -7,7 +7,7 @@ import DeleteAlertDialog from './DeleteDialog';
 // Objectの削除を行う画面を表するためのボタン //
 // ボタンを押すと削除画面を表示し
 // 再度, ボタンを押すと閉じる
-const DeleteButton = ({ task_name, content_text, open, handleClickOpen, handleClose, handleSubmit, aria_label, size, sx }) => {
+const DeleteButton = ({ task_name, content_text, open, handleClickOpen, handleClose, handleSubmit, aria_label, size, folder_key, sx }) => {
     return (
         <Box>
             <IconButton
@@ -24,6 +24,7 @@ const DeleteButton = ({ task_name, content_text, open, handleClickOpen, handleCl
                 open={ open }
                 handleClose={ handleClose }
                 handleSubmit={ handleSubmit }
+                folder_key={ folder_key }
             />
         </Box>
     );

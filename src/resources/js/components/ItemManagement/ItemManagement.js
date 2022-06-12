@@ -1,58 +1,43 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
-import useWindowDimensions from '../common/useWindowDimensions';
-import FolderTitle from './FolderTitle';
-import ItemSearchBar from './ItemSearchBar';
-import ViewItemList from './ViewItemList';
-import LoadingIcon from '../common/LoadingIcon';
-
-// BoxWidthを決定する関数 //
-// minWidthを300, maxWidthを1200とし
-// それ以外はwindow widthの7割とする
-const getBoxWidth = () => {
-    const { width, _ } = useWindowDimensions();
-    const BoxWidth = width * 0.7;
-    if(BoxWidth > 1200) {
-        return 1200;
-    }
-    else if(BoxWidth < 300) {
-        return 300;
-    }
-    else {
-        return BoxWidth;
-    }
-}
-
-// Body画面の高さ //
-const getBodyHeight = () => {
-    const {_, height} = useWindowDimensions();
-    return height - 190;
-}
+import FolderTitle from './FolderTitle/FolderTitle';
+import ItemSearchBar from './tool/ItemSearchBar';
+import ViewItemList from './VIewItemList/ViewItemList';
+import InfiniteScroll from 'react-infinite-scroller';
+import Skeleton from '@mui/material/Skeleton';
+import { SortContext } from '../common/SortManagement';
+import { getBoxWidth, getBodyHeight } from './tool/tool';
+import NotExistItems from './NotExistItems';
+import { NoticeContext } from '../common/Notification';
 
 // 特定のフォルダにに属するアイテムの管理画面 //
 // - 新しいアイテムの追加
 // - 既存アイテムの編集
 // - 既存アイテムの削除
 // - アイテムのフォルダ内検索 を実装
-
 const ItemManagement = ({ folderId }) => {
     const BoxWidth = getBoxWidth();
-    const all_items = new Array(100);
-    for(let i = 0; i < 100; i++) {
-        all_items[i] = {
-            "name": "Item" + String(i+1),
-            "key": i+1,
-        }
-    }
-
+    const bodyHeight = getBodyHeight();
     const [items, setItems] = useState([]);
     const [value, setValue] = useState("");
-    const [reRender, setReRender] = useState(false);
+    const [reRender, setReRender] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
-    const [sortIndex, setSortIndex] = useState(0);
-    const isMoutedRef = useRef(false);
+    const [hasMore, setHasMore] = useState(true);
+    const [state, dispatch] = useContext(SortContext);
+    const [notice_state, notice_dispatch] = useContext(NoticeContext);
+    const navigate = useNavigate();
+    const isMounted = useRef(false);
+    const page = useRef(1);
+
+    useEffect(() => {
+        isMounted.current = true;
+        return () => {
+            isMounted.current = false;
+        }
+    }, [])
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -67,67 +52,146 @@ const ItemManagement = ({ folderId }) => {
     }
 
     const handleReload = () => {
+        if(isLoading || !isMounted.current) { return; }
         handleRefresh();
+        setIsLoading(true);
+        setItems([]);
+        page.current = 1;
         handleReRender();
+        setHasMore(true);
         console.log("Refreshed Items");
     }
 
-    const handleSort = (index) => {
-        setSortIndex(index);
-    }
-
-    const SleepByPromiss = (sec) => {
-        return new Promise(resolve => setTimeout(resolve, sec*1000));
-    }
-
-    const items_fetch = async () => {
+    const handleSubmit = () => {
+        if(isLoading || !isMounted.current) { return; }
+        if(value.trim() === "") { return; }
+        setHasMore(false);
         setIsLoading(true);
-        await SleepByPromiss(5);
-        if(isMoutedRef.current) {
-            setItems(all_items);
+        setItems([]);
+        searchItems();
+    }
+
+    const failedToLoad = () => {
+        notice_dispatch({ type: "update_message", payload: "アニメの読み込みに失敗しました" });
+        notice_dispatch({ type: "handleNoticeOpen" });
+        navigate('/app/home', { replace: true });
+    }
+
+    const fetchItems = async (page) => {
+        let res;
+        const abortCtrl = new AbortController()
+        const timeout = setTimeout(() => { abortCtrl.abort() }, 10000);
+        try {
+            switch(state.sortIndex) {
+                // 最新順にitem取得 //
+                case 1:
+                    res = await fetch(`/api/folders/${folderId}/items?page=${page}&sort=latest`, { signal: abortCtrl.signal });
+                    break;
+
+                // タイトル順にitem取得 //
+                case 2:
+                    res = await fetch(`/api/folders/${folderId}/items?page=${page}&sort=title`, { signal: abortCtrl.signal });
+                    break
+
+                // 作成順にitem取得 //
+                default:
+                    res = await fetch(`/api/folders/${folderId}/items?page=${page}&sort=oldest`, { signal: abortCtrl.signal });
+                    break
+            }
+            if(!res.ok) {
+                throw new Error(res.statusText);
+            }
+        } catch (error) {
+            failedToLoad();
+        } finally {
+            clearTimeout(timeout);
+        }
+        return res;
+    }
+
+    const searchItems = async () => {
+        const abortCtrl = new AbortController()
+        const timeout = setTimeout(() => { abortCtrl.abort() }, 10000);
+        try {
+            const res = await fetch(`/api/folders/${folderId}/items/search?q=${value.trim()}`, { signal: abortCtrl.signal });
+            if(!res.ok) {
+                throw new Error(res.statusText);
+            }
+            const data = await res.json();
+            if(!isMounted.current) { return; }
+            setItems(data);
             setIsLoading(false);
-            setReRender(false);
-            console.log("ReRendered Items");
+        } catch (error) {
+            failedToLoad();
+        } finally {
+            clearTimeout(timeout);
         }
     }
 
     useEffect(() => {
-        isMoutedRef.current = true;
-        return () => {
-            isMoutedRef.current = false;
-            console.log("Unmounted");
+        const getItems = async () => {
+            const res = await fetchItems(1);
+            if(isMounted.current) {
+                const data = await res.json();
+                if(data.last_page === page.current) {
+                    setHasMore(false);
+                }
+                setItems(data.data);
+                setIsLoading(false);
+            }
         }
-    }, [])
 
-    useEffect(() => {
-        items_fetch();
-    }, [folderId])
-
-    useEffect(() => {
         if(reRender) {
-            items_fetch();
+            getItems();
+            setReRender(false);
         }
     }, [reRender])
 
     useEffect(() => {
-        if(!reRender && !isLoading) {
-            const filtered_items = all_items.filter((item) => item.name.toLowerCase().includes(value.toLowerCase()));
-            setItems(filtered_items);
-            console.log("Search");
-        }
-    }, [value])
-
-    useEffect(() => {
         if(!isLoading) {
-            console.log("Sorted by" + sortIndex);
+            handleReload();
         }
-    }, [sortIndex])
+    }, [state.sortIndex])
+
+    const loadMore = async () => {
+        page.current++;
+        const res = await fetchItems(page.current);
+        if(isMounted.current) {
+            const data = await res.json();
+            if(data.last_page === page.current) {
+                setHasMore(false);
+            }
+            setItems([...items, ...data.data]);
+        }
+    }
+
+    const loader = (
+            <Skeleton key={ 0 } variant="rectangular" sx={{ width: BoxWidth, height: "50px", marginTop: "10px" }} />
+        );
+
+    const ViewInfiniteScroll = () => {
+        return (
+            <Box sx={{ marginBottom: "100px" }}>
+                <InfiniteScroll
+                    pageStart={ 1 }
+                    initialLoad={ false }
+                    loadMore={ loadMore }
+                    hasMore={ hasMore }
+                    loader={ loader }
+                >
+                    <ViewItemList folderId={ folderId } bodyHeight={ bodyHeight } items={ items } handleReload={ handleReload } />
+                </InfiniteScroll>
+            </Box>
+        );
+    }
+
+    const isNotExist = (
+        (items.length) ? <ViewInfiniteScroll /> : <NotExistItems />
+    );
 
     // コンテンツのMain部分 //
     // フォルダのタイトルとアイテム一覧を表示
     const Main = () => {
-        const bodyHeight = getBodyHeight();
-
         return (
             <Grid
                 container
@@ -136,16 +200,12 @@ const ItemManagement = ({ folderId }) => {
             >
                 {/* フォルダのタイトル */}
                 <Grid container item>
-                    <FolderTitle folderId={ folderId } BoxWidth={ BoxWidth } handleReload={ handleReload } handleSort={ handleSort } />
+                    <FolderTitle folderId={ folderId } handleReload={ handleReload } isLoading={ isLoading } />
                 </Grid>
                 <Divider />
                 {/* アイテム一覧 */}
                 <Grid container item>
-                    {
-                        (isLoading) ?
-                        <LoadingIcon sx={{ height: bodyHeight, width: BoxWidth, display: "flex", justifyContent: "center", alignItems: "center"}} /> :
-                        <ViewItemList BoxWidth={ BoxWidth } bodyHeight={ bodyHeight } items={ items } handleReload={ handleReload } />
-                    }
+                    { (isLoading) ? (loader) : (isNotExist) }
                 </Grid>
             </Grid>
         );
@@ -156,10 +216,10 @@ const ItemManagement = ({ folderId }) => {
             <Main />
             {/* フォルダ内検索 */}
             <ItemSearchBar
-                BoxWidth={ BoxWidth }
                 handleChange={ handleChange }
                 handleRefresh={ handleRefresh }
                 handleReload={ handleReload }
+                handleSubmit={ handleSubmit }
                 value={ value }
             />
         </Box>

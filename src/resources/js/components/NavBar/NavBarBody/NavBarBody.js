@@ -1,34 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import Box from '@mui/material/Box';
-import AddFolder from './AddFolder';
-import ViewFolderList from './ViewFolderList';
-import FolderSearchBar from './FolderSearchBar';
+import AddFolder from './tool/AddFolder';
+import ViewFolderList from './ViewFolderList/ViewFolderList';
+import FolderSearchBar from './tool/FolderSearchBar';
+import { FolderStatusManagementContext } from '../../FolderStatusManagement/FolderStatusManagement';
+
 
 // Navgation BarのBody部分 //
 // - フォルダ一覧表示機能
 // - フォルダの追加機能
 // - フォルダの検索機能 を実装
-const NavBarBody = ({ NavBarWidth }) => {
-    const all_folders = new Array(100);
-    for(let i = 0; i < 100; i++) {
-        all_folders[i] = {
-            "name": "FolderFolderFolder" + String(i+1),
-            "key": i+1,
-        }
-    }
-
+const NavBarBody = () => {
     const [folders, setFolders] = useState([]);
     const [value, setValue] = useState("");
-    const [reRender, setReRender] = useState(true);
-    const [isLoading, setIsLoading] = useState(true);
-    const isMoutedRef = useRef(false);
+    const [state, dispatch] = useContext(FolderStatusManagementContext);
+    const isMounted = useRef(false);
 
     const handleChange = (e) => {
         setValue(e.target.value);
-    }
-
-    const handleReRender = () => {
-        setReRender(true);
     }
 
     const handleRefresh = () => {
@@ -36,42 +25,28 @@ const NavBarBody = ({ NavBarWidth }) => {
     }
 
     const handleReload = () => {
+        if(state.isLoading) { return; }
         handleRefresh();
-        handleReRender();
+        dispatch({ type: "handleReRenderOn" });
         console.log("Refreshed folders");
     }
 
-    const SleepByPromiss = (sec) => {
-        return new Promise(resolve => setTimeout(resolve, sec*1000));
-    }
-
-    const items_fetch = async () => {
-            setIsLoading(true);
-            await SleepByPromiss(5);
-        if(isMoutedRef.current) {
-            setFolders(all_folders);
-            setIsLoading(false);
-            setReRender(false);
-            console.log("ReRendered Folders");
-        }
-    }
-
     useEffect(() => {
-        isMoutedRef.current = true;
+        isMounted.current = true;
         return () => {
-            isMoutedRef.current = false;
+            isMounted.current = false;
         }
-    }, [])
+    })
 
     useEffect(() => {
-        if(reRender) {
-            items_fetch();
+        if(isMounted.current) {
+            setFolders(state.all_folders);
         }
-    }, [reRender])
+    }, [state.all_folders])
 
     useEffect(() => {
-        if(!reRender && !isLoading) {
-            const filtered_folders = all_folders.filter((folder) => folder.name.toLowerCase().includes(value.toLowerCase()));
+        if(!state.reRender && !state.isLoading) {
+            const filtered_folders = state.all_folders.filter((folder) => folder.name.toLowerCase().includes(value.toLowerCase()));
             setFolders(filtered_folders);
             console.log("Search");
         }
@@ -81,7 +56,6 @@ const NavBarBody = ({ NavBarWidth }) => {
         <Box>
             {/* フォルダ検索部分 */}
             <FolderSearchBar
-                NavBarWidth={ NavBarWidth }
                 handleChange={ handleChange }
                 handleRefresh={ handleRefresh }
                 handleReload={ handleReload }
@@ -89,17 +63,12 @@ const NavBarBody = ({ NavBarWidth }) => {
             />
 
             {/* フォルダ追加部分 */}
-            <AddFolder
-                NavBarWidth={ NavBarWidth }
-                handleReload={ handleReload }
-            />
+            <AddFolder handleReload={ handleReload } />
 
             {/* フォルダ一覧部分 */}
             <ViewFolderList
                 folders={ folders }
-                NavBarWidth={ NavBarWidth }
                 handleReload={ handleReload }
-                isLoading={ isLoading }
             />
         </Box>
     );

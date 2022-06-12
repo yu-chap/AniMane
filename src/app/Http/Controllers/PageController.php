@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Http\Controllers\Auth;
 use Auth;
 
 class PageController extends Controller
@@ -13,10 +12,10 @@ class PageController extends Controller
     public function TopPage_Routing()
     {
         if( Auth::check() ) {
-            return redirect()->to('app/home');
+            return redirect()->to('/app/home');
         }
         else {
-            return view('top/index');
+            return view('/top/index');
         }
     }
 }

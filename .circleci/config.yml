@@ -32,15 +32,6 @@ jobs:
                 paths:
                     - ./vendor
                 key: v1-dependencies-{{ checksum "src/composer.json" }}
-            - restore_cache:
-                keys:
-                - v1-node-{{ checksum "package.json" }}
-                - v1-node-
-            - run: npm install
-            - save_cache:
-                paths:
-                - ./node_modules
-                key: v1-node-{{ checksum "package.json" }}
             - run:
                 name: Run PHPUnit
                 working_directory: src

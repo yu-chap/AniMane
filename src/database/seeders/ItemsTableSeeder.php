@@ -20,7 +20,7 @@ class ItemsTableSeeder extends Seeder
             $names[] = "アニメ{$i}";
         }
 
-        $user_id = DB::table('users')->where('email', 'test_eamil@email.com')->value('id');
+        $user_id = DB::table('users')->where('email', 'test_email@email.com')->value('id');
         $folder = DB::table('folders')->where('user_id', $user_id)->first();
 
         foreach($names as $name) {
@@ -31,5 +31,15 @@ class ItemsTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
         }
+
+        $user_id = DB::table('users')->where('email', 'test@email.com')->value('id');
+        $folder = DB::table('folders')->where('user_id', $user_id)->first();
+
+        DB::table('items')->insert([
+            'name' => 'test',
+            'folder_id' => $folder->id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

@@ -15,9 +15,9 @@ class FoldersTableSeeder extends Seeder
      */
     public function run()
     {
-        $names = ['ラブコメ', 'ミステリー', '学校'];
+        $names = ['アクション', 'コメディ', 'ホラー'];
 
-        $user_id = DB::table('users')->where('email', 'test_eamil@email.com')->value('id');
+        $user_id = DB::table('users')->where('email', 'test_email@email.com')->value('id');
 
         foreach($names as $name) {
             DB::table('folders')->insert([
@@ -27,6 +27,14 @@ class FoldersTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
         }
-    }
 
+        $user_id = DB::table('users')->where('email', 'test@email.com')->value('id');
+
+        DB::table('folders')->insert([
+            'name' => 'test',
+            'user_id' => $user_id,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+    }
 }

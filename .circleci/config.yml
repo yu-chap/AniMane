@@ -8,7 +8,6 @@ jobs:
 
         environment:
             - DB_CONNECTION: circle_testing
-            - APP_ENV: testing
             - MYSQL_ALLOW_EMPTY_PASSWORD: true
 
         working_directory: ~/CI-test

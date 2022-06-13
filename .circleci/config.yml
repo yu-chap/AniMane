@@ -29,10 +29,10 @@ jobs:
             - ./vendor
           key: v1-dependencies-{{ checksum "src/composer.json" }}
 
-      # - run:
-      #     name: Run PHPUnit
-      #     working_directory: src
-      #     command: vendor/bin/phpunit
+      - run:
+          name: Run PHPUnit
+          working_directory: src
+          command: php artisan test
 
   # deploy ジョブ: EC2 に SSH 接続して、デプロイを実行する
   deploy:

@@ -9,7 +9,7 @@ jobs:
         environment:
             - DB_CONNECTION: circle_testing
             - APP_ENV: testing
-            - APP_KEY: ${APP_KEY}
+
         working_directory: ~/CI-test
 
         steps:
@@ -32,6 +32,9 @@ jobs:
                 paths:
                     - ./vendor
                 key: v1-dependencies-{{ checksum "src/composer.json" }}
+            - run:
+                name: base64 decode env file
+                command: echo ${ENV_FILE} | base64 -di > .env.testing
             - run:
                 name: Run PHPUnit
                 working_directory: src

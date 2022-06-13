@@ -40,6 +40,7 @@ class FolderControllerTest extends TestCase
     {
         $response = $this->actingAs($this->authUser)->postJson($this->PATH1, [ 'name' => 'new folder' ]);
         $response->assertStatus(200);
+        $this->assertDatabaseHas('folders', [ 'name' => 'new folder' ]);
     }
 
     // フォルダの作成時requestにnameがない,
@@ -69,6 +70,7 @@ class FolderControllerTest extends TestCase
         $folder = $this->authUser->folders()->where('name', 'アクション')->first();
         $response = $this->actingAs($this->authUser)->putJson($this->PATH2, [ 'name' => 'new folder' ]);
         $response->assertStatus(200);
+        $this->assertDatabaseHas('folders', [ 'name' => 'new folder' ]);
     }
 
     // フォルダの更新時
@@ -112,6 +114,7 @@ class FolderControllerTest extends TestCase
         $folder = $this->authUser->folders()->where('name', 'アクション')->first();
         $response = $this->actingAs($this->authUser)->deleteJson($this->PATH2);
         $response->assertStatus(200);
+        $this->assertDatabaseMissing('folders', [ 'name' => 'アクション' ]);
     }
 
     // フォルダの削除時

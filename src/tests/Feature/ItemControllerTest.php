@@ -76,6 +76,7 @@ class ItemControllerTest extends TestCase
     {
         $response = $this->actingAs($this->authUser)->postJson($this->PATH, [ 'name' => 'new item' ]);
         $response->assertStatus(200);
+        $this->assertDatabaseHas('items', [ 'name' => 'new item' ]);
     }
 
     // アイテム作成時
@@ -155,6 +156,7 @@ class ItemControllerTest extends TestCase
         $item = $this->folder->items()->first();
         $response = $this->actingAs($this->authUser)->putjson("{$this->PATH}/{$item->id}", [ 'name' => 'new item' ]);
         $response->assertStatus(200);
+        $this->assertDatabaseHas('items', [ 'name' => 'new item' ]);
     }
 
     // アイテム更新時
@@ -209,6 +211,7 @@ class ItemControllerTest extends TestCase
         $item = $this->folder->items()->first();
         $response = $this->actingAs($this->authUser)->deletejson("{$this->PATH}/{$item->id}");
         $response->assertStatus(200);
+        $this->assertDatabaseMissing('items', [ 'name' => $item->name ]);
     }
 
     // アイテム削除時

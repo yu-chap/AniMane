@@ -14,7 +14,6 @@ class RoutingTest extends TestCase
     public function setUp() :void
     {
         parent::setUp();
-
         $this->user = User::factory()->create();
     }
 

@@ -9,13 +9,28 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import ClearButton from '../../common/ClearButton';
 import { getBoxWidth, getSearchBarWidth } from './tool';
 
-// フォルダ内アイテム検索バー //
+// フォルダ内アイテム検索バー
 const ItemSearchBar = ({ handleChange, handleRefresh, handleReload, handleSubmit, value }) => {
     const BoxWidth = getBoxWidth();
     const SearchBarWidth = getSearchBarWidth();
+
+    const box_sx = {
+        position: "fixed",
+        display: "flex",
+        justifyContent: "center",
+        height: 100,
+        width: BoxWidth,
+    };
+
+    const paper_sx = {
+        margin: "20px auto",
+        display: "flex",
+        alignItems: "center",
+        width: SearchBarWidth,
+    };
     return (
-        <Box sx={{ position: "fixed", display: "flex", justifyContent: "center", height: 100, width: BoxWidth }}>
-            <Paper elevation={ 24 } sx={{ margin: "20px auto", display: "flex", alignItems: "center", width: SearchBarWidth }}>
+        <Box sx={ box_sx }>
+            <Paper elevation={ 24 } sx={ paper_sx }>
                 <Tooltip title="検索"><IconButton onClick={ handleSubmit }><SearchIcon /></IconButton></Tooltip>
                 <InputBase
                     sx={{ ml: 1, flex: 1 }}

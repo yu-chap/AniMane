@@ -4,7 +4,7 @@ import DeleteButton from '../../common/DeleteButton';
 import { NoticeContext } from '../../common/Notification';
 import axios from 'axios';
 
-// アイテム削除機能 //
+// アイテム削除機能
 // アイテムの削除ボタンを押すと削除画面が表示され
 // 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
 const DeleteItem = ({ folderId, item, handleReload }) => {
@@ -19,7 +19,13 @@ const DeleteItem = ({ folderId, item, handleReload }) => {
         setOpen(false);
     };
 
-    const loadAfterAction = (payload) => {
+    const handleSubmit = () => {
+        deleteItem();
+        handleClose();
+    }
+
+    // API通信後に成功かエラーかを通知するための関数
+    const ApiAfterAction = (payload) => {
         dispatch({ type: 'update_message', payload: payload });
         dispatch({ type: 'handleNoticeOpen' });
         handleReload();
@@ -31,22 +37,14 @@ const DeleteItem = ({ folderId, item, handleReload }) => {
         axios
             .delete(`/api/folders/${folderId}/items/${item.id}`, { signal: abortCtrl.signal })
             .then(() => {
-                console.log("Success");
-                console.log(`Delete Item key is ${item.id}`);
-                loadAfterAction(`アニメ(${item.name})の削除が完了しました`);
+                ApiAfterAction(`アニメ(${item.name})の削除が完了しました`);
             })
             .catch(() => {
-                console.log("Fail to delete");
-                loadAfterAction(`アニメ(${item.name})の削除に失敗しました`);
+                ApiAfterAction(`アニメ(${item.name})の削除に失敗しました`);
             })
             .finally(() => {
                 clearTimeout(timeout);
             })
-    }
-
-    const handleSubmit = () => {
-        deleteItem();
-        handleClose();
     }
 
     return (

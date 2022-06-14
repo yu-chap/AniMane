@@ -13,7 +13,7 @@ import { getBoxWidth, getBodyHeight } from './tool/tool';
 import NotExistItems from './NotExistItems';
 import { NoticeContext } from '../common/Notification';
 
-// 特定のフォルダにに属するアイテムの管理画面 //
+// 特定のフォルダにに属するアイテムの管理画面
 // - 新しいアイテムの追加
 // - 既存アイテムの編集
 // - 既存アイテムの削除
@@ -59,7 +59,6 @@ const ItemManagement = ({ folderId }) => {
         page.current = 1;
         handleReRender();
         setHasMore(true);
-        console.log("Refreshed Items");
     }
 
     const handleSubmit = () => {
@@ -128,6 +127,8 @@ const ItemManagement = ({ folderId }) => {
         }
     }
 
+    // Mountされた時点でアイテム読み込みを開始し
+    // reRenderがtrueになるたびに再読み込み
     useEffect(() => {
         const getItems = async () => {
             const res = await fetchItems(1);
@@ -147,12 +148,14 @@ const ItemManagement = ({ folderId }) => {
         }
     }, [reRender])
 
+    // アイテムの並び替えが発生した場合に再読み込み
     useEffect(() => {
         if(!isLoading) {
             handleReload();
         }
     }, [state.sortIndex])
 
+    // 無限スクロールで呼ばれるアイテムの読み込みを行う関数
     const loadMore = async () => {
         page.current++;
         const res = await fetchItems(page.current);
@@ -165,10 +168,12 @@ const ItemManagement = ({ folderId }) => {
         }
     }
 
+    // 無限スクロールで読み込み中に表示するコンポーネント
     const loader = (
             <Skeleton key={ 0 } variant="rectangular" sx={{ width: BoxWidth, height: "50px", marginTop: "10px" }} />
         );
 
+    // 無限スクロール用のコンポーネント
     const ViewInfiniteScroll = () => {
         return (
             <Box sx={{ marginBottom: "100px" }}>
@@ -179,17 +184,18 @@ const ItemManagement = ({ folderId }) => {
                     hasMore={ hasMore }
                     loader={ loader }
                 >
-                    <ViewItemList folderId={ folderId } bodyHeight={ bodyHeight } items={ items } handleReload={ handleReload } />
+                    <ViewItemList folderId={ folderId } items={ items } handleReload={ handleReload } />
                 </InfiniteScroll>
             </Box>
         );
     }
 
+    // アイテムが存在するときとそうでないときに表示する分岐
     const isNotExist = (
         (items.length) ? <ViewInfiniteScroll /> : <NotExistItems />
     );
 
-    // コンテンツのMain部分 //
+    // コンテンツのMain部分
     // フォルダのタイトルとアイテム一覧を表示
     const Main = () => {
         return (
@@ -203,6 +209,7 @@ const ItemManagement = ({ folderId }) => {
                     <FolderTitle folderId={ folderId } handleReload={ handleReload } isLoading={ isLoading } />
                 </Grid>
                 <Divider />
+
                 {/* アイテム一覧 */}
                 <Grid container item>
                     { (isLoading) ? (loader) : (isNotExist) }

@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import ClearIcon from '@mui/icons-material/Clear';
 
-// 入力のクリアボタン //
+// 入力のクリアボタン
 // ボタンを押すと入力内容がクリアされる
 const ClearButton = ({ title, handleRefresh, fontSize }) => {
     return (

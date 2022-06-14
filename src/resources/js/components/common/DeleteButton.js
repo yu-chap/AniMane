@@ -4,7 +4,7 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteAlertDialog from './DeleteDialog';
 
-// Objectの削除を行う画面を表するためのボタン //
+// Objectの削除を行う画面を表するためのボタン
 // ボタンを押すと削除画面を表示し
 // 再度, ボタンを押すと閉じる
 const DeleteButton = ({ task_name, content_text, open, handleClickOpen, handleClose, handleSubmit, aria_label, size, folder_key, sx }) => {

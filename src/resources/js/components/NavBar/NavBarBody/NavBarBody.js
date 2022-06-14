@@ -5,8 +5,7 @@ import ViewFolderList from './ViewFolderList/ViewFolderList';
 import FolderSearchBar from './tool/FolderSearchBar';
 import { FolderStatusManagementContext } from '../../FolderStatusManagement/FolderStatusManagement';
 
-
-// Navgation BarのBody部分 //
+// Navgation BarのBody部分
 // - フォルダ一覧表示機能
 // - フォルダの追加機能
 // - フォルダの検索機能 を実装
@@ -28,7 +27,6 @@ const NavBarBody = () => {
         if(state.isLoading) { return; }
         handleRefresh();
         dispatch({ type: "handleReRenderOn" });
-        console.log("Refreshed folders");
     }
 
     useEffect(() => {
@@ -38,17 +36,18 @@ const NavBarBody = () => {
         }
     })
 
+    // 表示するフォルダのセット
     useEffect(() => {
         if(isMounted.current) {
             setFolders(state.all_folders);
         }
     }, [state.all_folders])
 
+    // フォルダ検索欄に入力が行われた際に表示するフォルダの一覧のセット
     useEffect(() => {
         if(!state.reRender && !state.isLoading) {
             const filtered_folders = state.all_folders.filter((folder) => folder.name.toLowerCase().includes(value.toLowerCase()));
             setFolders(filtered_folders);
-            console.log("Search");
         }
     }, [value])
 

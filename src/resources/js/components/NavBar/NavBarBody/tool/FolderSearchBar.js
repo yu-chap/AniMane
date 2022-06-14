@@ -11,12 +11,31 @@ import ClearButton from '../../../common/ClearButton';
 import { NAV_BAR_WIDTH } from '../../NavBar';
 
 
-// フォルダ検索バー //
+// フォルダ検索バー
 const FolderSearchBar = ({ handleChange, handleRefresh, handleReload, value }) => {
     const SearchBarWidth = NAV_BAR_WIDTH - 50;
+    const box_sx = {
+        width: NAV_BAR_WIDTH,
+        height: 60,
+        justifyContent: "center",
+        alignItems: "start",
+        display: "flex",
+        bgcolor: yellow[600],
+        top: 120,
+        left: "0%",
+        position: "fixed",
+    };
+
+    const paper_sx = {
+        p: "2px 4px",
+        display: "flex",
+        alignItems: "center",
+        width: SearchBarWidth,
+    };
+
     return (
-        <Box sx={{ width: NAV_BAR_WIDTH, height: 60, justifyContent: "center", alignItems: "start", display: "flex", bgcolor: yellow[600], top: 120, left: "0%", position: "fixed" }}>
-            <Paper sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: SearchBarWidth }}>
+        <Box sx={ box_sx }>
+            <Paper sx={ paper_sx }>
                 <IconButton disabled>
                     <SearchIcon fontSize="small" />
                 </IconButton>

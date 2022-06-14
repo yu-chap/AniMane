@@ -6,8 +6,9 @@ import { NoticeContext } from '../../../common/Notification';
 import { grey, yellow } from '@mui/material/colors';
 import axios from 'axios';
 import { NAV_BAR_WIDTH } from '../../NavBar';
+import { value_validation } from '../../../common/tool';
 
-// フォルダ追加機能 //
+// フォルダ追加機能
 // フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
 // 閉じるまたは追加ボタンを押すと新しいフォルダ作成のキャンセルまたは新しいフォルダ作成が完了する
 // 入力は1字以上200字以下で制限する
@@ -18,9 +19,6 @@ const AddFolder = ({ handleReload }) => {
     const [errorText, setErrorText] = useState();
     const [state, dispatch] = useContext(NoticeContext);
     const errorMessage = "1字以上200字以下で記入してください。";
-    const inputProps = {
-        maxLength: 200,
-    };
 
     const handleErrorRefresh = () => {
         setErrorText("");
@@ -47,16 +45,6 @@ const AddFolder = ({ handleReload }) => {
         handleErrorRefresh();
     };
 
-    const value_validation = (target_value) => {
-        target_value = target_value.trim();
-        if(target_value.length <= inputProps.maxLength && target_value.length > 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     const handleChange = (e) => {
         setValue(e.target.value);
         if(value_validation(e.target.value)) {
@@ -67,7 +55,18 @@ const AddFolder = ({ handleReload }) => {
         }
     };
 
-    const loadAfterAction = (payload) => {
+    const handleSubmit = () => {
+        if(value_validation(value)) {
+            createFolder();
+            handleClose();
+        }
+        else {
+            handleError(errorMessage);
+        }
+    }
+
+    // API通信後に成功かエラーかを通知するための関数
+    const ApiAfterAction = (payload) => {
         dispatch({ type: 'update_message', payload: payload });
         dispatch({ type: 'handleNoticeOpen' });
         handleReload();
@@ -79,27 +78,14 @@ const AddFolder = ({ handleReload }) => {
         axios
             .post('/api/folders', { name: value.trim() }, { signal: abortCtrl.signal })
             .then(() => {
-                console.log("Success");
-                console.log(value.trim());
-                loadAfterAction("フォルダの作成が完了しました");
+                ApiAfterAction("フォルダの作成が完了しました");
             })
             .catch(() => {
-                console.log("Fail to submit");
-                loadAfterAction("フォルダの作成に失敗しました");
+                ApiAfterAction("フォルダの作成に失敗しました");
             })
             .finally(() => {
                 clearTimeout(timeout);
             })
-    }
-
-    const handleSubmit = () => {
-        if(value_validation(value)) {
-            createFolder();
-            handleClose();
-        }
-        else {
-            handleError(errorMessage);
-        }
     }
 
     const AddButton_sx = {

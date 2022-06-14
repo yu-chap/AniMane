@@ -2,28 +2,30 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FixedSizeList } from 'react-window';
 import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
-import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import Typography from '@mui/material/Typography';
 import FolderIcon from '@mui/icons-material/Folder';
 import EditFolder from '../tool/EditFolder';
 import DeleteFolder from '../tool/DeleteFolder';
-import LoadingIcon from '../../../common/LoadingIcon';
 import { grey, yellow } from '@mui/material/colors';
 import { useWindowDimensions } from '../../../common/tool';
 import { FolderStatusManagementContext } from '../../../FolderStatusManagement/FolderStatusManagement';
 import { NAV_BAR_WIDTH } from '../../NavBar';
+import NotExistFolders from './NotExitstFoders';
+import LoadingFolder from './LoadingFolder';
 
-// フォルダ一覧を表示するコンポーネント //
+// フォルダ一覧を表示するコンポーネント
 const ViewFolderList = ({ folders, handleReload }) => {
     const { _, height } = useWindowDimensions();
     const NavBarBody_h = height - 290;  // headerとfooterのheightを引いた残りの高さ
     const [state, dispatch] = useContext(FolderStatusManagementContext);
 
+    // フォルダ一覧表示の各要素
+    // - フォルダの選択
+    // - フォルダの編集
+    // - フォルダの削除が可能
     const renderRow = ({ index, style }) => {
         return (
             <ListItem
@@ -58,6 +60,7 @@ const ViewFolderList = ({ folders, handleReload }) => {
         );
     };
 
+    // フォルダの一覧表示
     const FolderList = () => {
         return (
             <FixedSizeList
@@ -72,58 +75,26 @@ const ViewFolderList = ({ folders, handleReload }) => {
         );
     }
 
-    const NotExistFolders = () => {
-        const textList = [
-            "該当するフォルダーが存在しません",
-            "(フォルダの作成を行ってください)"
-        ];
-
-        return (
-            <Box sx={{ width: NAV_BAR_WIDTH, height: NavBarBody_h, display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Grid
-                    container
-                    direction="column"
-                    sx={{ width: NAV_BAR_WIDTH }}
-                >
-                    {
-                        textList.map((text, index) => {
-                            return (
-                                <Grid
-                                    key={ index }
-                                    container
-                                    item
-                                    sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-                                >
-                                    <Typography fontWeight="bold">
-                                        { text }
-                                    </Typography>
-                                </Grid>
-                            );
-                        })
-                    }
-                </Grid>
-            </Box>
-        );
-    }
-
-    const LoadingFolder = () => {
-        return (
-            <Skeleton animation="wave" variant="rectangular" sx={{ width: NAV_BAR_WIDTH, height: NavBarBody_h }}>
-            </Skeleton>
-        );
-    }
-
     const Main = () => {
         return (
             <Box>
-                { (folders.length) ? <FolderList /> : <NotExistFolders /> }
+                { (folders.length) ? <FolderList /> : <NotExistFolders NavBarBody_h={ NavBarBody_h } /> }
             </Box>
         );
     }
 
+    const box_sx = {
+        width: NAV_BAR_WIDTH,
+        height: NavBarBody_h,
+        position: "fixed",
+        bgcolor: yellow[100],
+        top: 230,
+        left: "0%",
+    };
+
     return (
-        <Box sx={{ width: NAV_BAR_WIDTH, height: NavBarBody_h, position: "fixed", bgcolor: yellow[100], top: 230, left: "0%" }}>
-            { (state.isLoading) ? <LoadingFolder /> : <Main /> }
+        <Box sx={ box_sx }>
+            { (state.isLoading) ? <LoadingFolder NavBarBody_h={ NavBarBody_h }/> : <Main /> }
         </Box>
     );
 }

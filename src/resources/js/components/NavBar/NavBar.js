@@ -6,10 +6,10 @@ import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import NavBarContent from './NavBarContent';
 import { grey } from '@mui/material/colors';
 
-// Width of Navgation Bar //
+// Width of Navgation Bar
 export const NAV_BAR_WIDTH = 300;
 
-// Drwaerの表示制御 //
+// Drwaerの表示制御
 // メニューボタンを押すとNavigation Contentを表示し
 // 再度, メニューボタンを押すとNavigation Contentを閉じる
 const DrawerHandleButton = ({ onClick, sx, color }) => {
@@ -24,7 +24,7 @@ const DrawerHandleButton = ({ onClick, sx, color }) => {
     );
 }
 
-// Drwaerが表示された時の内容 //
+// Drwaerが表示された時の内容
 const DrawerContent = ({ onClick }) => {
     return (
         <Box
@@ -41,7 +41,7 @@ const DrawerContent = ({ onClick }) => {
     );
 };
 
-// Navigation Bar Component //
+// Navigation Bar Component
 // メニューボタンを押すとNavigation Contentを表示し
 // 再度, メニューボタンを押すとNavigation Contentを閉じる
 const NavBar = () => {

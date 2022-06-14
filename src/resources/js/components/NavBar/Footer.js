@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import { grey, yellow } from '@mui/material/colors';
 import { NAV_BAR_WIDTH } from './NavBar';
 
-// ログアウトボタン //
+// ログアウトボタン
 const LogOutButton = () => {
     const button_sx = {
         width: NAV_BAR_WIDTH,
@@ -25,7 +25,7 @@ const LogOutButton = () => {
     );
 }
 
-// Navigation barのfooter部分 //
+// Navigation barのfooter部分
 // Navigation contentの下部分に常に配置
 // ログアウトができる
 const NavBarFoot = () => {

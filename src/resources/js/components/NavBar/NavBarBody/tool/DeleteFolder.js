@@ -4,7 +4,7 @@ import DeleteButton from '../../../common/DeleteButton';
 import { NoticeContext } from '../../../common/Notification';
 import axios from 'axios';
 
-// フォルダ削除機能 //
+// フォルダ削除機能
 // フォルダの削除ボタンを押すと削除画面が表示され
 // 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
 const DeleteFolder = ({ folder, handleReload }) => {
@@ -19,7 +19,13 @@ const DeleteFolder = ({ folder, handleReload }) => {
         setOpen(false);
     };
 
-    const loadAfterAction = (payload) => {
+    const handleSubmit = () => {
+        deleteFolder();
+        handleClose();
+    }
+
+    // API通信後に成功かエラーかを通知するための関数
+    const ApiAfterAction = (payload) => {
         dispatch({ type: 'update_message', payload: payload });
         dispatch({ type: 'handleNoticeOpen' });
         handleReload();
@@ -31,22 +37,14 @@ const DeleteFolder = ({ folder, handleReload }) => {
         axios
             .delete(`/api/folders/${folder.id}`, { signal: abortCtrl.signal })
             .then(() => {
-                console.log("Success");
-                loadAfterAction(`フォルダ(${folder.name})の削除が完了しました`);
+                ApiAfterAction(`フォルダ(${folder.name})の削除が完了しました`);
             })
             .catch(() => {
-                console.log("Fail to delete");
-                loadAfterAction(`フォルダ(${folder.name})の削除に失敗しました`);
+                ApiAfterAction(`フォルダ(${folder.name})の削除に失敗しました`);
             })
             .finally(() => {
                 clearTimeout(timeout);
             })
-    }
-
-    const handleSubmit = () => {
-        console.log(`Delete Folder key is ${folder.id}`);
-        deleteFolder();
-        handleClose();
     }
 
     return (

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { NoticeContext } from './Notification';
 
 // 画面のwidthとheightを取得する関数 //
 export const useWindowDimensions = () => {
@@ -21,3 +22,13 @@ export const useWindowDimensions = () => {
     return windowDimensions;
 }
 
+// フォルダとアイテムの追加・更新時に行う入力値のバリデーション
+//  1文字以上200以内で制限する
+const inputProps = {
+    maxLength: 200,
+};
+
+export const value_validation = (target_value) => {
+    target_value = target_value.trim();
+    return (target_value.length <= inputProps.maxLength && target_value.length > 0) ? true : false;
+}

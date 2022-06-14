@@ -66,7 +66,6 @@ const FolderStatusManagement = ({ children }) => {
                 dispatch({ type: "setFolders", payload: data });
                 dispatch({ type: "handleIsLoadingOff" });
                 dispatch({ type: "handleReRenderOff" });
-                console.log("ReRendered Folders");
             } catch (error) {
                 failedToLoad();
             } finally {

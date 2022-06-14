@@ -58,11 +58,11 @@
                                 送信
                                 </button>
 
-                                @if (Route::has('password.request'))
+                                <!-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                     パスワード忘れた場合
                                     </a>
-                                @endif
+                                @endif -->
                             </div>
                         </div>
                     </form>

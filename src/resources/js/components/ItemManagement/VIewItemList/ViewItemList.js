@@ -1,19 +1,21 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import EditItem from '../tool/EditItem';
 import DeleteItem from '../tool/DeleteItem';
 import { getBoxWidth } from '../tool/tool';
 
-// アイテムの一覧表示 //
-const ViewItemList = ({ folderId, bodyHeight, items, handleReload }) => {
+// アイテムの一覧表示
+const ViewItemList = ({ folderId, items, handleReload }) => {
     const BoxWidth = getBoxWidth();
     const titleWidth = BoxWidth - 90;
 
-    // 各アイテムを表示するための枠組み //
+    // 各アイテムを表示するための枠組み
+    // - アイテムのタイトルの表示
+    // - アイテムの編集ボタン
+    // - アイテムの削除ボタン の作成
     const PaperContent = ({ item }) => {
         const contentList = [
             {
@@ -56,7 +58,7 @@ const ViewItemList = ({ folderId, bodyHeight, items, handleReload }) => {
         );
     }
 
-    // アイテム一覧 //
+    // アイテム一覧
     const ItemList = () => {
         return (
             <Box sx={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "10px" }}>
@@ -68,41 +70,6 @@ const ViewItemList = ({ folderId, bodyHeight, items, handleReload }) => {
                         </Grid>
                     ))
                 }
-                </Grid>
-            </Box>
-        );
-    }
-
-    // 検索後に該当するアイテムが存在しない場合に表示する画面 //
-    const NotExistItems = () => {
-        const textList = [
-            "該当するアニメが存在しません",
-            "(アニメの作成を行ってください)"
-        ];
-
-        return (
-            <Box sx={{ height: bodyHeight, width: BoxWidth, display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <Grid
-                    container
-                    direction="column"
-                    sx={{ width: BoxWidth }}
-                >
-                    {
-                        textList.map((text, index) => {
-                            return (
-                                <Grid
-                                    key={ index }
-                                    container
-                                    item
-                                    sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-                                >
-                                    <Typography fontWeight="bold">
-                                        { text }
-                                    </Typography>
-                                </Grid>
-                            );
-                        })
-                    }
                 </Grid>
             </Box>
         );

@@ -8,7 +8,7 @@ import { value_validation } from '../../../common/tool';
 // フォルダ編集機能 //
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとフォルダ編集のキャンセルまたはフォルダ編集が完了する
-// 入力は1字以上100字以下で制限する
+// 入力は1字以上200字以下で制限する
 const EditFolder = ({ folder, handleReload }) => {
     const [open, setOpen] = useState(false);
     const [error, setError] = useState(false);

@@ -7,6 +7,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { SortContext } from '../../common/SortManagement';
 
+// アイテムの並べ替えをするMenu
+// 0:  作成順
+// 1:  最新順
+// 2:  タイトル順
+// でSortする
+
 const options = [
     "作成順",
     "最新順",
@@ -55,17 +61,19 @@ const SortItem = ({ isLoading }) => {
                     "aria-labelledby": "sort-button",
                 }}
             >
-                { options.map((option, index) => {
-                    return (
-                        <MenuItem
-                            key={ index }
-                            selected={ index === state.sortIndex }
-                            onClick={ () => { handleSortIndex(index); } }
-                        >
-                            { option }
-                        </MenuItem>
-                    );
-                }) }
+                {
+                    options.map((option, index) => {
+                        return (
+                            <MenuItem
+                                key={ index }
+                                selected={ index === state.sortIndex }
+                                onClick={ () => { handleSortIndex(index); } }
+                            >
+                                { option }
+                            </MenuItem>
+                        );
+                    })
+                }
             </Menu>
         </Box>
     );

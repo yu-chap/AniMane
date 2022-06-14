@@ -3,13 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Grid from '@mui/material/Grid';
-import Skeleton from '@mui/material/Skeleton';
 import AddItem from '../tool/AddItem';
 import SortItem from '../tool/SortItem';
 import { FolderStatusManagementContext } from '../../FolderStatusManagement/FolderStatusManagement';
 import { NoticeContext } from '../../common/Notification';
 import { getBoxWidth } from '../tool/tool';
+import LoadingTitle from './LoadingTiltle';
 
+/*** アイテム一覧表示中のフォルダタイトルの表示 ***/
+
+// コンテンツMain部分
 const Main = ({ folderId, current_folder, titleWidth, handleReload, isLoading }) => {
 
     const contentList = [
@@ -43,27 +46,21 @@ const Main = ({ folderId, current_folder, titleWidth, handleReload, isLoading })
             container
             sx={{ height: "60px", marginBottom: "5px", marginTop: "20px" }}
         >
-            { contentList.map((content, index) => {
-                return (
-                    <Grid
-                        key={ index }
-                        container
-                        item
-                        sx={ content.sx }
-                    >
-                        { content.body }
-                    </Grid>
-                );
-            }) }
+            {
+                contentList.map((content, index) => {
+                    return (
+                        <Grid
+                            key={ index }
+                            container
+                            item
+                            sx={ content.sx }
+                        >
+                            { content.body }
+                        </Grid>
+                    );
+                })
+            }
         </Grid>
-    );
-}
-
-const LoadingTitle = () => {
-    const BoxWidth = getBoxWidth();
-    return (
-        <Skeleton variant="rectangular" sx={{ height: "40px", width: BoxWidth, marginTop: "40px", marginBottom: "5px" }}>
-        </Skeleton>
     );
 }
 
@@ -74,12 +71,14 @@ const FolderTitle = ({ folderId, handleReload, isLoading }) => {
     const [folder, setFolder] = useState(null);
     const navigate = useNavigate();
 
+    // フォルダタイトルが読み込めない場合の通知
     const NotFound = () => {
         notice_dispatch({ type: "update_message", payload: "フォルダの読み込みに失敗したか存在しないページにアクセスした可能性があります" });
         notice_dispatch({ type: "handleNoticeOpen" });
         navigate('/app/home', { replace: true });
     }
 
+    // 現在選択されたフォルダタイトルの取得
     useEffect(() => {
         if(!state.isLoading) {
             if(state.all_folders != null) {

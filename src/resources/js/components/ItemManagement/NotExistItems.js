@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { getBodyHeight, getBoxWidth } from './tool/tool';
 
-// 検索後に該当するアイテムが存在しない場合に表示する画面 //
+// 検索後に該当するアイテムが存在しない場合に表示する画面
 const NotExistItems = () => {
     const bodyHeight = getBodyHeight();
     const BoxWidth = getBoxWidth();
@@ -13,8 +13,22 @@ const NotExistItems = () => {
         "(アニメの作成を行ってください)"
     ];
 
+    const box_sx = {
+        height: bodyHeight,
+        width: BoxWidth,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+    };
+
+    const grid_sx = {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    };
+
     return (
-        <Box sx={{ height: bodyHeight, width: BoxWidth, display: "flex", justifyContent: "center", alignItems: "center"}}>
+        <Box sx={ box_sx }>
             <Grid
                 container
                 direction="column"
@@ -27,7 +41,7 @@ const NotExistItems = () => {
                                 key={ index }
                                 container
                                 item
-                                sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+                                sx={ grid_sx }
                             >
                                 <Typography fontWeight="bold">
                                     { text }

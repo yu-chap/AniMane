@@ -4590,299 +4590,6 @@ var _utils = __webpack_require__(/*! @mui/material/utils */ "./node_modules/@mui
 
 /***/ }),
 
-/***/ "./node_modules/@mui/lab/LoadingButton/LoadingButton.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@mui/lab/LoadingButton/LoadingButton.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/utils */ "./node_modules/@mui/utils/esm/chainPropTypes.js");
-/* harmony import */ var _mui_material_utils__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/utils */ "./node_modules/@mui/material/utils/capitalize.js");
-/* harmony import */ var _mui_material_utils__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/utils */ "./node_modules/@mui/material/utils/useId.js");
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/utils/esm/composeClasses/composeClasses.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/styled.js");
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/styles */ "./node_modules/@mui/material/styles/useThemeProps.js");
-/* harmony import */ var _mui_material_Button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Button */ "./node_modules/@mui/material/Button/Button.js");
-/* harmony import */ var _mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/CircularProgress */ "./node_modules/@mui/material/CircularProgress/CircularProgress.js");
-/* harmony import */ var _loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./loadingButtonClasses */ "./node_modules/@mui/lab/LoadingButton/loadingButtonClasses.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-const _excluded = ["children", "disabled", "id", "loading", "loadingIndicator", "loadingPosition", "variant"];
-
-
-
-
-
-
-
-
-
-
-
-
-const useUtilityClasses = ownerState => {
-  const {
-    loading,
-    loadingPosition,
-    classes
-  } = ownerState;
-  const slots = {
-    root: ['root', loading && 'loading'],
-    startIcon: [loading && `startIconLoading${(0,_mui_material_utils__WEBPACK_IMPORTED_MODULE_4__["default"])(loadingPosition)}`],
-    endIcon: [loading && `endIconLoading${(0,_mui_material_utils__WEBPACK_IMPORTED_MODULE_4__["default"])(loadingPosition)}`],
-    loadingIndicator: ['loadingIndicator', loading && `loadingIndicator${(0,_mui_material_utils__WEBPACK_IMPORTED_MODULE_4__["default"])(loadingPosition)}`]
-  };
-  const composedClasses = (0,_mui_base__WEBPACK_IMPORTED_MODULE_5__["default"])(slots, _loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__.getLoadingButtonUtilityClass, classes);
-  return (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, classes, composedClasses);
-}; // TODO use `import { rootShouldForwardProp } from '../styles/styled';` once move to core
-
-
-const rootShouldForwardProp = prop => prop !== 'ownerState' && prop !== 'theme' && prop !== 'sx' && prop !== 'as' && prop !== 'classes';
-
-const LoadingButtonRoot = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_7__["default"])(_mui_material_Button__WEBPACK_IMPORTED_MODULE_8__["default"], {
-  shouldForwardProp: prop => rootShouldForwardProp(prop) || prop === 'classes',
-  name: 'MuiLoadingButton',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    return [styles.root, styles.startIconLoadingStart && {
-      [`& .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].startIconLoadingStart}`]: styles.startIconLoadingStart
-    }, styles.endIconLoadingEnd && {
-      [`& .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].endIconLoadingEnd}`]: styles.endIconLoadingEnd
-    }];
-  }
-})(({
-  ownerState,
-  theme
-}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-  [`& .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].startIconLoadingStart}, & .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].endIconLoadingEnd}`]: {
-    transition: theme.transitions.create(['opacity'], {
-      duration: theme.transitions.duration.short
-    }),
-    opacity: 0
-  }
-}, ownerState.loadingPosition === 'center' && {
-  transition: theme.transitions.create(['background-color', 'box-shadow', 'border-color'], {
-    duration: theme.transitions.duration.short
-  }),
-  [`&.${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].loading}`]: {
-    color: 'transparent'
-  }
-}, ownerState.loadingPosition === 'start' && ownerState.fullWidth && {
-  [`& .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].startIconLoadingStart}, & .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].endIconLoadingEnd}`]: {
-    transition: theme.transitions.create(['opacity'], {
-      duration: theme.transitions.duration.short
-    }),
-    opacity: 0,
-    marginRight: -8
-  }
-}, ownerState.loadingPosition === 'end' && ownerState.fullWidth && {
-  [`& .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].startIconLoadingStart}, & .${_loadingButtonClasses__WEBPACK_IMPORTED_MODULE_6__["default"].endIconLoadingEnd}`]: {
-    transition: theme.transitions.create(['opacity'], {
-      duration: theme.transitions.duration.short
-    }),
-    opacity: 0,
-    marginLeft: -8
-  }
-}));
-const LoadingButtonLoadingIndicator = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_7__["default"])('div', {
-  name: 'MuiLoadingButton',
-  slot: 'LoadingIndicator',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.loadingIndicator, styles[`loadingIndicator${(0,_mui_material_utils__WEBPACK_IMPORTED_MODULE_4__["default"])(ownerState.loadingPosition)}`]];
-  }
-})(({
-  theme,
-  ownerState
-}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-  position: 'absolute',
-  visibility: 'visible',
-  display: 'flex'
-}, ownerState.loadingPosition === 'start' && (ownerState.variant === 'outlined' || ownerState.variant === 'contained') && {
-  left: ownerState.size === 'small' ? 10 : 14
-}, ownerState.loadingPosition === 'start' && ownerState.variant === 'text' && {
-  left: 6
-}, ownerState.loadingPosition === 'center' && {
-  left: '50%',
-  transform: 'translate(-50%)',
-  color: theme.palette.action.disabled
-}, ownerState.loadingPosition === 'end' && (ownerState.variant === 'outlined' || ownerState.variant === 'contained') && {
-  right: ownerState.size === 'small' ? 10 : 14
-}, ownerState.loadingPosition === 'end' && ownerState.variant === 'text' && {
-  right: 6
-}, ownerState.loadingPosition === 'start' && ownerState.fullWidth && {
-  position: 'relative',
-  left: -10
-}, ownerState.loadingPosition === 'end' && ownerState.fullWidth && {
-  position: 'relative',
-  right: -10
-}));
-const LoadingButton = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function LoadingButton(inProps, ref) {
-  const props = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_9__["default"])({
-    props: inProps,
-    name: 'MuiLoadingButton'
-  });
-
-  const {
-    children,
-    disabled = false,
-    id: idProp,
-    loading = false,
-    loadingIndicator: loadingIndicatorProp,
-    loadingPosition = 'center',
-    variant = 'text'
-  } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(props, _excluded);
-
-  const id = (0,_mui_material_utils__WEBPACK_IMPORTED_MODULE_10__["default"])(idProp);
-  const loadingIndicator = loadingIndicatorProp != null ? loadingIndicatorProp : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_CircularProgress__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    "aria-labelledby": id,
-    color: "inherit",
-    size: 16
-  });
-
-  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
-    disabled,
-    loading,
-    loadingIndicator,
-    loadingPosition,
-    variant
-  });
-
-  const classes = useUtilityClasses(ownerState);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(LoadingButtonRoot, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-    disabled: disabled || loading,
-    id: id,
-    ref: ref
-  }, other, {
-    variant: variant,
-    classes: classes,
-    ownerState: ownerState,
-    children: ownerState.loadingPosition === 'end' ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-      children: [children, loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(LoadingButtonLoadingIndicator, {
-        className: classes.loadingIndicator,
-        ownerState: ownerState,
-        children: loadingIndicator
-      })]
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-      children: [loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(LoadingButtonLoadingIndicator, {
-        className: classes.loadingIndicator,
-        ownerState: ownerState,
-        children: loadingIndicator
-      }), children]
-    })
-  }));
-});
- true ? LoadingButton.propTypes
-/* remove-proptypes */
-= {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * The content of the component.
-   */
-  children: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().node),
-
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().object),
-
-  /**
-   * If `true`, the component is disabled.
-   * @default false
-   */
-  disabled: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().bool),
-
-  /**
-   * @ignore
-   */
-  id: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().string),
-
-  /**
-   * If `true`, the loading indicator is shown.
-   * @default false
-   */
-  loading: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().bool),
-
-  /**
-   * Element placed before the children if the button is in loading state.
-   * The node should contain an element with `role="progressbar"` with an accessible name.
-   * By default we render a `CircularProgress` that is labelled by the button itself.
-   * @default <CircularProgress color="inherit" size={16} />
-   */
-  loadingIndicator: (prop_types__WEBPACK_IMPORTED_MODULE_12___default().node),
-
-  /**
-   * The loading indicator can be positioned on the start, end, or the center of the button.
-   * @default 'center'
-   */
-  loadingPosition: (0,_mui_utils__WEBPACK_IMPORTED_MODULE_13__["default"])(prop_types__WEBPACK_IMPORTED_MODULE_12___default().oneOf(['start', 'end', 'center']), props => {
-    if (props.loadingPosition === 'start' && !props.startIcon) {
-      return new Error(`MUI: The loadingPosition="start" should be used in combination with startIcon.`);
-    }
-
-    if (props.loadingPosition === 'end' && !props.endIcon) {
-      return new Error(`MUI: The loadingPosition="end" should be used in combination with endIcon.`);
-    }
-
-    return null;
-  }),
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: prop_types__WEBPACK_IMPORTED_MODULE_12___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_12___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_12___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_12___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_12___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_12___default().bool)])), (prop_types__WEBPACK_IMPORTED_MODULE_12___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_12___default().object)]),
-
-  /**
-   * The variant to use.
-   * @default 'text'
-   */
-  variant: prop_types__WEBPACK_IMPORTED_MODULE_12___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_12___default().oneOf(['contained', 'outlined', 'text']), (prop_types__WEBPACK_IMPORTED_MODULE_12___default().string)])
-} : 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingButton);
-
-/***/ }),
-
-/***/ "./node_modules/@mui/lab/LoadingButton/loadingButtonClasses.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@mui/lab/LoadingButton/loadingButtonClasses.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "getLoadingButtonUtilityClass": () => (/* binding */ getLoadingButtonUtilityClass)
-/* harmony export */ });
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js");
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/utils/esm/generateUtilityClasses/generateUtilityClasses.js");
-
-function getLoadingButtonUtilityClass(slot) {
-  return (0,_mui_base__WEBPACK_IMPORTED_MODULE_0__["default"])('MuiLoadingButton', slot);
-}
-const loadingButtonClasses = (0,_mui_base__WEBPACK_IMPORTED_MODULE_1__["default"])('MuiLoadingButton', ['root', 'loading', 'loadingIndicator', 'loadingIndicatorCenter', 'loadingIndicatorStart', 'loadingIndicatorEnd', 'endIconLoadingEnd', 'startIconLoadingStart']);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadingButtonClasses);
-
-/***/ }),
-
 /***/ "./node_modules/@mui/material/Backdrop/Backdrop.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@mui/material/Backdrop/Backdrop.js ***!
@@ -6747,330 +6454,6 @@ if (true) {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ButtonGroupContext);
-
-/***/ }),
-
-/***/ "./node_modules/@mui/material/CircularProgress/CircularProgress.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@mui/material/CircularProgress/CircularProgress.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
-/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
-/* harmony import */ var _mui_utils__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/utils */ "./node_modules/@mui/utils/esm/chainPropTypes.js");
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/utils/esm/composeClasses/composeClasses.js");
-/* harmony import */ var _mui_system__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/system */ "./node_modules/@emotion/react/dist/emotion-react.browser.esm.js");
-/* harmony import */ var _utils_capitalize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/capitalize */ "./node_modules/@mui/material/utils/capitalize.js");
-/* harmony import */ var _styles_useThemeProps__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../styles/useThemeProps */ "./node_modules/@mui/material/styles/useThemeProps.js");
-/* harmony import */ var _styles_styled__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../styles/styled */ "./node_modules/@mui/material/styles/styled.js");
-/* harmony import */ var _circularProgressClasses__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./circularProgressClasses */ "./node_modules/@mui/material/CircularProgress/circularProgressClasses.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-const _excluded = ["className", "color", "disableShrink", "size", "style", "thickness", "value", "variant"];
-
-let _ = t => t,
-    _t,
-    _t2,
-    _t3,
-    _t4;
-
-
-
-
-
-
-
-
-
-
-
-
-const SIZE = 44;
-const circularRotateKeyframe = (0,_mui_system__WEBPACK_IMPORTED_MODULE_5__.keyframes)(_t || (_t = _`
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-`));
-const circularDashKeyframe = (0,_mui_system__WEBPACK_IMPORTED_MODULE_5__.keyframes)(_t2 || (_t2 = _`
-  0% {
-    stroke-dasharray: 1px, 200px;
-    stroke-dashoffset: 0;
-  }
-
-  50% {
-    stroke-dasharray: 100px, 200px;
-    stroke-dashoffset: -15px;
-  }
-
-  100% {
-    stroke-dasharray: 100px, 200px;
-    stroke-dashoffset: -125px;
-  }
-`));
-
-const useUtilityClasses = ownerState => {
-  const {
-    classes,
-    variant,
-    color,
-    disableShrink
-  } = ownerState;
-  const slots = {
-    root: ['root', variant, `color${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__["default"])(color)}`],
-    svg: ['svg'],
-    circle: ['circle', `circle${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__["default"])(variant)}`, disableShrink && 'circleDisableShrink']
-  };
-  return (0,_mui_base__WEBPACK_IMPORTED_MODULE_7__["default"])(slots, _circularProgressClasses__WEBPACK_IMPORTED_MODULE_8__.getCircularProgressUtilityClass, classes);
-};
-
-const CircularProgressRoot = (0,_styles_styled__WEBPACK_IMPORTED_MODULE_9__["default"])('span', {
-  name: 'MuiCircularProgress',
-  slot: 'Root',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.root, styles[ownerState.variant], styles[`color${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__["default"])(ownerState.color)}`]];
-  }
-})(({
-  ownerState,
-  theme
-}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-  display: 'inline-block'
-}, ownerState.variant === 'determinate' && {
-  transition: theme.transitions.create('transform')
-}, ownerState.color !== 'inherit' && {
-  color: (theme.vars || theme).palette[ownerState.color].main
-}), ({
-  ownerState
-}) => ownerState.variant === 'indeterminate' && (0,_mui_system__WEBPACK_IMPORTED_MODULE_5__.css)(_t3 || (_t3 = _`
-      animation: ${0} 1.4s linear infinite;
-    `), circularRotateKeyframe));
-const CircularProgressSVG = (0,_styles_styled__WEBPACK_IMPORTED_MODULE_9__["default"])('svg', {
-  name: 'MuiCircularProgress',
-  slot: 'Svg',
-  overridesResolver: (props, styles) => styles.svg
-})({
-  display: 'block' // Keeps the progress centered
-
-});
-const CircularProgressCircle = (0,_styles_styled__WEBPACK_IMPORTED_MODULE_9__["default"])('circle', {
-  name: 'MuiCircularProgress',
-  slot: 'Circle',
-  overridesResolver: (props, styles) => {
-    const {
-      ownerState
-    } = props;
-    return [styles.circle, styles[`circle${(0,_utils_capitalize__WEBPACK_IMPORTED_MODULE_6__["default"])(ownerState.variant)}`], ownerState.disableShrink && styles.circleDisableShrink];
-  }
-})(({
-  ownerState,
-  theme
-}) => (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-  stroke: 'currentColor'
-}, ownerState.variant === 'determinate' && {
-  transition: theme.transitions.create('stroke-dashoffset')
-}, ownerState.variant === 'indeterminate' && {
-  // Some default value that looks fine waiting for the animation to kicks in.
-  strokeDasharray: '80px, 200px',
-  strokeDashoffset: 0 // Add the unit to fix a Edge 16 and below bug.
-
-}), ({
-  ownerState
-}) => ownerState.variant === 'indeterminate' && !ownerState.disableShrink && (0,_mui_system__WEBPACK_IMPORTED_MODULE_5__.css)(_t4 || (_t4 = _`
-      animation: ${0} 1.4s ease-in-out infinite;
-    `), circularDashKeyframe));
-/**
- * ## ARIA
- *
- * If the progress bar is describing the loading progress of a particular region of a page,
- * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
- * attribute to `true` on that region until it has finished loading.
- */
-
-const CircularProgress = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.forwardRef(function CircularProgress(inProps, ref) {
-  const props = (0,_styles_useThemeProps__WEBPACK_IMPORTED_MODULE_10__["default"])({
-    props: inProps,
-    name: 'MuiCircularProgress'
-  });
-
-  const {
-    className,
-    color = 'primary',
-    disableShrink = false,
-    size = 40,
-    style,
-    thickness = 3.6,
-    value = 0,
-    variant = 'indeterminate'
-  } = props,
-        other = (0,_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(props, _excluded);
-
-  const ownerState = (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, props, {
-    color,
-    disableShrink,
-    size,
-    thickness,
-    value,
-    variant
-  });
-
-  const classes = useUtilityClasses(ownerState);
-  const circleStyle = {};
-  const rootStyle = {};
-  const rootProps = {};
-
-  if (variant === 'determinate') {
-    const circumference = 2 * Math.PI * ((SIZE - thickness) / 2);
-    circleStyle.strokeDasharray = circumference.toFixed(3);
-    rootProps['aria-valuenow'] = Math.round(value);
-    circleStyle.strokeDashoffset = `${((100 - value) / 100 * circumference).toFixed(3)}px`;
-    rootStyle.transform = 'rotate(-90deg)';
-  }
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(CircularProgressRoot, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-    className: (0,clsx__WEBPACK_IMPORTED_MODULE_3__["default"])(classes.root, className),
-    style: (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({
-      width: size,
-      height: size
-    }, rootStyle, style),
-    ownerState: ownerState,
-    ref: ref,
-    role: "progressbar"
-  }, rootProps, other, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(CircularProgressSVG, {
-      className: classes.svg,
-      ownerState: ownerState,
-      viewBox: `${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`,
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(CircularProgressCircle, {
-        className: classes.circle,
-        style: circleStyle,
-        ownerState: ownerState,
-        cx: SIZE,
-        cy: SIZE,
-        r: (SIZE - thickness) / 2,
-        fill: "none",
-        strokeWidth: thickness
-      })
-    })
-  }));
-});
- true ? CircularProgress.propTypes
-/* remove-proptypes */
-= {
-  // ----------------------------- Warning --------------------------------
-  // | These PropTypes are generated from the TypeScript type definitions |
-  // |     To update them edit the d.ts file and run "yarn proptypes"     |
-  // ----------------------------------------------------------------------
-
-  /**
-   * Override or extend the styles applied to the component.
-   */
-  classes: (prop_types__WEBPACK_IMPORTED_MODULE_11___default().object),
-
-  /**
-   * @ignore
-   */
-  className: (prop_types__WEBPACK_IMPORTED_MODULE_11___default().string),
-
-  /**
-   * The color of the component.
-   * It supports both default and custom theme colors, which can be added as shown in the
-   * [palette customization guide](https://mui.com/material-ui/customization/palette/#adding-new-colors).
-   * @default 'primary'
-   */
-  color: prop_types__WEBPACK_IMPORTED_MODULE_11___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_11___default().oneOf(['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning']), (prop_types__WEBPACK_IMPORTED_MODULE_11___default().string)]),
-
-  /**
-   * If `true`, the shrink animation is disabled.
-   * This only works if variant is `indeterminate`.
-   * @default false
-   */
-  disableShrink: (0,_mui_utils__WEBPACK_IMPORTED_MODULE_12__["default"])((prop_types__WEBPACK_IMPORTED_MODULE_11___default().bool), props => {
-    if (props.disableShrink && props.variant && props.variant !== 'indeterminate') {
-      return new Error('MUI: You have provided the `disableShrink` prop ' + 'with a variant other than `indeterminate`. This will have no effect.');
-    }
-
-    return null;
-  }),
-
-  /**
-   * The size of the component.
-   * If using a number, the pixel unit is assumed.
-   * If using a string, you need to provide the CSS unit, e.g '3rem'.
-   * @default 40
-   */
-  size: prop_types__WEBPACK_IMPORTED_MODULE_11___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_11___default().number), (prop_types__WEBPACK_IMPORTED_MODULE_11___default().string)]),
-
-  /**
-   * @ignore
-   */
-  style: (prop_types__WEBPACK_IMPORTED_MODULE_11___default().object),
-
-  /**
-   * The system prop that allows defining system overrides as well as additional CSS styles.
-   */
-  sx: prop_types__WEBPACK_IMPORTED_MODULE_11___default().oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_11___default().arrayOf(prop_types__WEBPACK_IMPORTED_MODULE_11___default().oneOfType([(prop_types__WEBPACK_IMPORTED_MODULE_11___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_11___default().object), (prop_types__WEBPACK_IMPORTED_MODULE_11___default().bool)])), (prop_types__WEBPACK_IMPORTED_MODULE_11___default().func), (prop_types__WEBPACK_IMPORTED_MODULE_11___default().object)]),
-
-  /**
-   * The thickness of the circle.
-   * @default 3.6
-   */
-  thickness: (prop_types__WEBPACK_IMPORTED_MODULE_11___default().number),
-
-  /**
-   * The value of the progress indicator for the determinate variant.
-   * Value between 0 and 100.
-   * @default 0
-   */
-  value: (prop_types__WEBPACK_IMPORTED_MODULE_11___default().number),
-
-  /**
-   * The variant to use.
-   * Use indeterminate when there is no progress value.
-   * @default 'indeterminate'
-   */
-  variant: prop_types__WEBPACK_IMPORTED_MODULE_11___default().oneOf(['determinate', 'indeterminate'])
-} : 0;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CircularProgress);
-
-/***/ }),
-
-/***/ "./node_modules/@mui/material/CircularProgress/circularProgressClasses.js":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@mui/material/CircularProgress/circularProgressClasses.js ***!
-  \********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "getCircularProgressUtilityClass": () => (/* binding */ getCircularProgressUtilityClass)
-/* harmony export */ });
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js");
-/* harmony import */ var _mui_base__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @mui/base */ "./node_modules/@mui/utils/esm/generateUtilityClasses/generateUtilityClasses.js");
-
-function getCircularProgressUtilityClass(slot) {
-  return (0,_mui_base__WEBPACK_IMPORTED_MODULE_0__["default"])('MuiCircularProgress', slot);
-}
-const circularProgressClasses = (0,_mui_base__WEBPACK_IMPORTED_MODULE_1__["default"])('MuiCircularProgress', ['root', 'determinate', 'indeterminate', 'colorPrimary', 'colorSecondary', 'svg', 'circle', 'circleDeterminate', 'circleIndeterminate', 'circleDisableShrink']);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (circularProgressClasses);
 
 /***/ }),
 
@@ -34009,6 +33392,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // フォルダの読み込み管理
+// Mountされた時点でフォルダ一覧の読み込みを開始し
+// reRenderがtrueになるたびにフォルダの再読み込みを行う
+// @current_folderIdで現在選択されているフォルダを管理する
 
 
 var initialState = {
@@ -34137,26 +33524,25 @@ var FolderStatusManagement = function FolderStatusManagement(_ref) {
                 dispatch({
                   type: "handleReRenderOff"
                 });
-                console.log("ReRendered Folders");
-                _context.next = 19;
+                _context.next = 18;
                 break;
 
-              case 16:
-                _context.prev = 16;
+              case 15:
+                _context.prev = 15;
                 _context.t0 = _context["catch"](1);
                 failedToLoad();
 
-              case 19:
-                _context.prev = 19;
+              case 18:
+                _context.prev = 18;
                 clearTimeout(timeout);
-                return _context.finish(19);
+                return _context.finish(18);
 
-              case 22:
+              case 21:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 16, 19, 22]]);
+        }, _callee, null, [[1, 15, 18, 21]]);
       }));
 
       return function fetchFolders() {
@@ -34198,16 +33584,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Skeleton */ "./node_modules/@mui/material/Skeleton/Skeleton.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
 /* harmony import */ var _tool_AddItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tool/AddItem */ "./resources/js/components/ItemManagement/tool/AddItem.js");
 /* harmony import */ var _tool_SortItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tool/SortItem */ "./resources/js/components/ItemManagement/tool/SortItem.js");
 /* harmony import */ var _FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../FolderStatusManagement/FolderStatusManagement */ "./resources/js/components/FolderStatusManagement/FolderStatusManagement.js");
 /* harmony import */ var _common_Notification__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/Notification */ "./resources/js/components/common/Notification.js");
 /* harmony import */ var _tool_tool__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../tool/tool */ "./resources/js/components/ItemManagement/tool/tool.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _LoadingTiltle__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LoadingTiltle */ "./resources/js/components/ItemManagement/FolderTitle/LoadingTiltle.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -34231,6 +33617,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+/*** アイテム一覧表示中のフォルダタイトルの表示 ***/
+// コンテンツMain部分
+
 
 
 var Main = function Main(_ref) {
@@ -34240,10 +33629,10 @@ var Main = function Main(_ref) {
       handleReload = _ref.handleReload,
       isLoading = _ref.isLoading;
   var contentList = [{
-    "body": /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    "body": /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_8__["default"], {
       title: "".concat(current_folder.name, "\u306E\u4E00\u89A7"),
       placement: "bottom-end",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
         component: "div",
         textOverflow: "ellipsis",
         overflow: "hidden",
@@ -34264,7 +33653,7 @@ var Main = function Main(_ref) {
       alignItems: "flex-end"
     }
   }, {
-    "body": /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_tool_AddItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    "body": /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tool_AddItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
       folderId: folderId,
       handleReload: handleReload
     }),
@@ -34275,7 +33664,7 @@ var Main = function Main(_ref) {
       alignItems: "flex-end"
     }
   }, {
-    "body": /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_tool_SortItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    "body": /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tool_SortItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
       isLoading: isLoading
     }),
     "sx": {
@@ -34285,7 +33674,7 @@ var Main = function Main(_ref) {
       alignItems: "flex-end"
     }
   }];
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__["default"], {
     container: true,
     sx: {
       height: "60px",
@@ -34293,26 +33682,13 @@ var Main = function Main(_ref) {
       marginTop: "20px"
     },
     children: contentList.map(function (content, index) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_10__["default"], {
         container: true,
         item: true,
         sx: content.sx,
         children: content.body
       }, index);
     })
-  });
-};
-
-var LoadingTitle = function LoadingTitle() {
-  var BoxWidth = (0,_tool_tool__WEBPACK_IMPORTED_MODULE_5__.getBoxWidth)();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    variant: "rectangular",
-    sx: {
-      height: "40px",
-      width: BoxWidth,
-      marginTop: "40px",
-      marginBottom: "5px"
-    }
   });
 };
 
@@ -34337,7 +33713,7 @@ var FolderTitle = function FolderTitle(_ref2) {
       folder = _useState2[0],
       setFolder = _useState2[1];
 
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useNavigate)();
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.useNavigate)(); // フォルダタイトルが読み込めない場合の通知
 
   var NotFound = function NotFound() {
     notice_dispatch({
@@ -34350,7 +33726,8 @@ var FolderTitle = function FolderTitle(_ref2) {
     navigate('/app/home', {
       replace: true
     });
-  };
+  }; // 現在選択されたフォルダタイトルの取得
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!state.isLoading) {
@@ -34366,8 +33743,8 @@ var FolderTitle = function FolderTitle(_ref2) {
       }
     }
   }, [state.isLoading]);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    children: state.isLoading || folder == null ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(LoadingTitle, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Main, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    children: state.isLoading || folder == null ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_LoadingTiltle__WEBPACK_IMPORTED_MODULE_6__["default"], {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Main, {
       folderId: folderId,
       current_folder: folder,
       titleWidth: titleWidth,
@@ -34378,6 +33755,44 @@ var FolderTitle = function FolderTitle(_ref2) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FolderTitle);
+
+/***/ }),
+
+/***/ "./resources/js/components/ItemManagement/FolderTitle/LoadingTiltle.js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/ItemManagement/FolderTitle/LoadingTiltle.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Skeleton */ "./node_modules/@mui/material/Skeleton/Skeleton.js");
+/* harmony import */ var _tool_tool__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tool/tool */ "./resources/js/components/ItemManagement/tool/tool.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+ // フォルダタイトルのロード中に表示
+
+
+
+var LoadingTitle = function LoadingTitle() {
+  var BoxWidth = (0,_tool_tool__WEBPACK_IMPORTED_MODULE_1__.getBoxWidth)();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    variant: "rectangular",
+    sx: {
+      height: "40px",
+      width: BoxWidth,
+      marginTop: "40px",
+      marginBottom: "5px"
+    }
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingTitle);
 
 /***/ }),
 
@@ -34449,7 +33864,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // 特定のフォルダにに属するアイテムの管理画面 //
+ // 特定のフォルダにに属するアイテムの管理画面
 // - 新しいアイテムの追加
 // - 既存アイテムの編集
 // - 既存アイテムの削除
@@ -34531,7 +33946,6 @@ var ItemManagement = function ItemManagement(_ref) {
     page.current = 1;
     handleReRender();
     setHasMore(true);
-    console.log("Refreshed Items");
   };
 
   var handleSubmit = function handleSubmit() {
@@ -34714,7 +34128,9 @@ var ItemManagement = function ItemManagement(_ref) {
     return function searchItems() {
       return _ref3.apply(this, arguments);
     };
-  }();
+  }(); // Mountされた時点でアイテム読み込みを開始し
+  // reRenderがtrueになるたびに再読み込み
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var getItems = /*#__PURE__*/function () {
@@ -34765,12 +34181,13 @@ var ItemManagement = function ItemManagement(_ref) {
       getItems();
       setReRender(false);
     }
-  }, [reRender]);
+  }, [reRender]); // アイテムの並び替えが発生した場合に再読み込み
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (!isLoading) {
       handleReload();
     }
-  }, [state.sortIndex]);
+  }, [state.sortIndex]); // 無限スクロールで呼ばれるアイテムの読み込みを行う関数
 
   var loadMore = /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
@@ -34814,7 +34231,8 @@ var ItemManagement = function ItemManagement(_ref) {
     return function loadMore() {
       return _ref5.apply(this, arguments);
     };
-  }();
+  }(); // 無限スクロールで読み込み中に表示するコンポーネント
+
 
   var loader = /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_12__["default"], {
     variant: "rectangular",
@@ -34823,7 +34241,8 @@ var ItemManagement = function ItemManagement(_ref) {
       height: "50px",
       marginTop: "10px"
     }
-  }, 0);
+  }, 0); // 無限スクロール用のコンポーネント
+
 
   var ViewInfiniteScroll = function ViewInfiniteScroll() {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -34838,15 +34257,15 @@ var ItemManagement = function ItemManagement(_ref) {
         loader: loader,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_VIewItemList_ViewItemList__WEBPACK_IMPORTED_MODULE_4__["default"], {
           folderId: folderId,
-          bodyHeight: bodyHeight,
           items: items,
           handleReload: handleReload
         })
       })
     });
-  };
+  }; // アイテムが存在するときとそうでないときに表示する分岐
 
-  var isNotExist = items.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ViewInfiniteScroll, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_NotExistItems__WEBPACK_IMPORTED_MODULE_8__["default"], {}); // コンテンツのMain部分 //
+
+  var isNotExist = items.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ViewInfiniteScroll, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_NotExistItems__WEBPACK_IMPORTED_MODULE_8__["default"], {}); // コンテンツのMain部分
   // フォルダのタイトルとアイテム一覧を表示
 
   var Main = function Main() {
@@ -34913,7 +34332,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // 検索後に該当するアイテムが存在しない場合に表示する画面 //
+ // 検索後に該当するアイテムが存在しない場合に表示する画面
 
 
 
@@ -34921,14 +34340,20 @@ var NotExistItems = function NotExistItems() {
   var bodyHeight = (0,_tool_tool__WEBPACK_IMPORTED_MODULE_1__.getBodyHeight)();
   var BoxWidth = (0,_tool_tool__WEBPACK_IMPORTED_MODULE_1__.getBoxWidth)();
   var textList = ["該当するアニメが存在しません", "(アニメの作成を行ってください)"];
+  var box_sx = {
+    height: bodyHeight,
+    width: BoxWidth,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  };
+  var grid_sx = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    sx: {
-      height: bodyHeight,
-      width: BoxWidth,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center"
-    },
+    sx: box_sx,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
       container: true,
       direction: "column",
@@ -34939,11 +34364,7 @@ var NotExistItems = function NotExistItems() {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
           container: true,
           item: true,
-          sx: {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          },
+          sx: grid_sx,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
             fontWeight: "bold",
             children: text
@@ -34972,7 +34393,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
 /* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
 /* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
 /* harmony import */ var _mui_material_Paper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/Paper */ "./node_modules/@mui/material/Paper/Paper.js");
 /* harmony import */ var _tool_EditItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tool/EditItem */ "./resources/js/components/ItemManagement/tool/EditItem.js");
@@ -34986,18 +34406,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
- // アイテムの一覧表示 //
+ // アイテムの一覧表示
 
 
 
 var ViewItemList = function ViewItemList(_ref) {
   var folderId = _ref.folderId,
-      bodyHeight = _ref.bodyHeight,
       items = _ref.items,
       handleReload = _ref.handleReload;
   var BoxWidth = (0,_tool_tool__WEBPACK_IMPORTED_MODULE_3__.getBoxWidth)();
-  var titleWidth = BoxWidth - 90; // 各アイテムを表示するための枠組み //
+  var titleWidth = BoxWidth - 90; // 各アイテムを表示するための枠組み
+  // - アイテムのタイトルの表示
+  // - アイテムの編集ボタン
+  // - アイテムの削除ボタン の作成
 
   var PaperContent = function PaperContent(_ref2) {
     var item = _ref2.item;
@@ -35067,7 +34488,7 @@ var ViewItemList = function ViewItemList(_ref) {
         })
       })
     });
-  }; // アイテム一覧 //
+  }; // アイテム一覧
 
 
   var ItemList = function ItemList() {
@@ -35088,42 +34509,6 @@ var ViewItemList = function ViewItemList(_ref) {
             item: true,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(PaperContent, {
               item: item
-            })
-          }, index);
-        })
-      })
-    });
-  }; // 検索後に該当するアイテムが存在しない場合に表示する画面 //
-
-
-  var NotExistItems = function NotExistItems() {
-    var textList = ["該当するアニメが存在しません", "(アニメの作成を行ってください)"];
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      sx: {
-        height: bodyHeight,
-        width: BoxWidth,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        container: true,
-        direction: "column",
-        sx: {
-          width: BoxWidth
-        },
-        children: textList.map(function (text, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            container: true,
-            item: true,
-            sx: {
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_9__["default"], {
-              fontWeight: "bold",
-              children: text
             })
           }, index);
         })
@@ -35152,12 +34537,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
 /* harmony import */ var _common_AddIconButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/AddIconButton */ "./resources/js/components/common/AddIconButton.js");
 /* harmony import */ var _common_Notification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/Notification */ "./resources/js/components/common/Notification.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common_tool__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/tool */ "./resources/js/components/common/tool.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -35174,10 +34560,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // アイテム追加機能 //
+
+ // アイテム追加機能
 // アイテムの追加ボタンを押すと新しいアイテムを作成する画面が表示され
 // 閉じるまたは追加ボタンを押すと新しいアイテム作成のキャンセルまたは新しいアイテム作成が完了する
-// 入力は1字以上100字以下(数字, アルファベット, _)で制限する
+// 入力は1字以上200字以下で制限する
 
 
 
@@ -35211,9 +34598,6 @@ var AddItem = function AddItem(_ref) {
       dispatch = _useContext2[1];
 
   var errorMessage = "1字以上200字以下で記入してください。";
-  var inputProps = {
-    maxLength: 200
-  };
 
   var handleErrorRefresh = function handleErrorRefresh() {
     setErrorText("");
@@ -35240,27 +34624,27 @@ var AddItem = function AddItem(_ref) {
     handleErrorRefresh();
   };
 
-  var value_validation = function value_validation(target_value) {
-    target_value = target_value.trim();
-
-    if (target_value.length <= inputProps.maxLength && target_value.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   var handleChange = function handleChange(e) {
     setValue(e.target.value);
 
-    if (value_validation(e.target.value)) {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(e.target.value)) {
       handleErrorRefresh();
     } else {
       handleError(errorMessage);
     }
   };
 
-  var loadAfterAction = function loadAfterAction(payload) {
+  var handleSubmit = function handleSubmit() {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(value)) {
+      createItem();
+      handleClose();
+    } else {
+      handleError(errorMessage);
+    }
+  }; // API通信後に成功かエラーかを通知するための関数
+
+
+  var ApiAfterAction = function ApiAfterAction(payload) {
     dispatch({
       type: 'update_message',
       payload: payload
@@ -35281,28 +34665,16 @@ var AddItem = function AddItem(_ref) {
     }, {
       signal: abortCtrl.signal
     }).then(function () {
-      console.log("Success");
-      console.log(value.trim());
-      loadAfterAction("アニメの作成が完了しました");
+      ApiAfterAction("アニメの作成が完了しました");
     })["catch"](function () {
-      console.log("Fail to submit");
-      loadAfterAction("アニメの作成に失敗しました");
+      ApiAfterAction("アニメの作成に失敗しました");
     })["finally"](function () {
       clearTimeout(timeout);
     });
   };
 
-  var handleSubmit = function handleSubmit() {
-    if (value_validation(value)) {
-      createItem();
-      handleClose();
-    } else {
-      handleError(errorMessage);
-    }
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_common_AddIconButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_common_AddIconButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
       task_name: "\u65B0\u3057\u3044\u30A2\u30CB\u30E1\u306E\u4F5C\u6210",
       id: "new_item_name",
       label: "\u65B0\u3057\u3044\u30A2\u30CB\u30E1\u540D",
@@ -35358,7 +34730,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // アイテム削除機能 //
+ // アイテム削除機能
 // アイテムの削除ボタンを押すと削除画面が表示され
 // 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
 
@@ -35387,7 +34759,13 @@ var DeleteItem = function DeleteItem(_ref) {
     setOpen(false);
   };
 
-  var loadAfterAction = function loadAfterAction(payload) {
+  var handleSubmit = function handleSubmit() {
+    deleteItem();
+    handleClose();
+  }; // API通信後に成功かエラーかを通知するための関数
+
+
+  var ApiAfterAction = function ApiAfterAction(payload) {
     dispatch({
       type: 'update_message',
       payload: payload
@@ -35406,20 +34784,12 @@ var DeleteItem = function DeleteItem(_ref) {
     axios__WEBPACK_IMPORTED_MODULE_3___default()["delete"]("/api/folders/".concat(folderId, "/items/").concat(item.id), {
       signal: abortCtrl.signal
     }).then(function () {
-      console.log("Success");
-      console.log("Delete Item key is ".concat(item.id));
-      loadAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u524A\u9664\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u524A\u9664\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
     })["catch"](function () {
-      console.log("Fail to delete");
-      loadAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u524A\u9664\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u524A\u9664\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
     })["finally"](function () {
       clearTimeout(timeout);
     });
-  };
-
-  var handleSubmit = function handleSubmit() {
-    deleteItem();
-    handleClose();
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -35452,12 +34822,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
 /* harmony import */ var _common_EditButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/EditButton */ "./resources/js/components/common/EditButton.js");
 /* harmony import */ var _common_Notification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/Notification */ "./resources/js/components/common/Notification.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common_tool__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../common/tool */ "./resources/js/components/common/tool.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -35474,11 +34845,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  // アイテム編集機能 //
 // アイテムの編集ボタンを押すとアイテムを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとアイテム編集のキャンセルまたはアイテム編集が完了する
-// 入力は1字以上100字以下(数字, アルファベット, _)で制限する
-// @item_key: 編集するアイテムのkey
+// 入力は1字以上200字以下で制限する
 
 
 
@@ -35513,9 +34884,6 @@ var EditItem = function EditItem(_ref) {
       dispatch = _useContext2[1];
 
   var errorMessage = "1字以上200字以下で記入してください。";
-  var inputProps = {
-    maxLength: 200
-  };
 
   var handleErrorRefresh = function handleErrorRefresh() {
     setErrorText("");
@@ -35542,27 +34910,27 @@ var EditItem = function EditItem(_ref) {
     handleErrorRefresh();
   };
 
-  var value_validation = function value_validation(target_value) {
-    target_value = target_value.trim();
-
-    if (target_value.length <= inputProps.maxLength && target_value.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   var handleChange = function handleChange(e) {
     setValue(e.target.value);
 
-    if (value_validation(e.target.value)) {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(e.target.value)) {
       handleErrorRefresh();
     } else {
       handleError(errorMessage);
     }
   };
 
-  var loadAfterAction = function loadAfterAction(payload) {
+  var handleSubmit = function handleSubmit() {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(value)) {
+      updateItem();
+      handleClose();
+    } else {
+      handleError(errorMessage);
+    }
+  }; // API通信後に成功かエラーかを通知するための関数
+
+
+  var ApiAfterAction = function ApiAfterAction(payload) {
     dispatch({
       type: 'update_message',
       payload: payload
@@ -35583,28 +34951,16 @@ var EditItem = function EditItem(_ref) {
     }, {
       signal: abortCtrl.signal
     }).then(function () {
-      console.log("Success");
-      console.log(value.trim());
-      loadAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u66F4\u65B0\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u66F4\u65B0\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
     })["catch"](function () {
-      console.log("Fail to submit");
-      loadAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u66F4\u65B0\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30A2\u30CB\u30E1(".concat(item.name, ")\u306E\u66F4\u65B0\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
     })["finally"](function () {
       clearTimeout(timeout);
     });
   };
 
-  var handleSubmit = function handleSubmit() {
-    if (value_validation(value)) {
-      updateItem();
-      handleClose();
-    } else {
-      handleError(errorMessage);
-    }
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_common_EditButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_common_EditButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
       task_name: "\u30A2\u30CB\u30E1\u306E\u7DE8\u96C6",
       id: "edit item",
       label: "\u65B0\u3057\u3044\u30A2\u30CB\u30E1\u540D",
@@ -35659,7 +35015,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // フォルダ内アイテム検索バー //
+ // フォルダ内アイテム検索バー
 
 
 
@@ -35672,22 +35028,24 @@ var ItemSearchBar = function ItemSearchBar(_ref) {
       value = _ref.value;
   var BoxWidth = (0,_tool__WEBPACK_IMPORTED_MODULE_2__.getBoxWidth)();
   var SearchBarWidth = (0,_tool__WEBPACK_IMPORTED_MODULE_2__.getSearchBarWidth)();
+  var box_sx = {
+    position: "fixed",
+    display: "flex",
+    justifyContent: "center",
+    height: 100,
+    width: BoxWidth
+  };
+  var paper_sx = {
+    margin: "20px auto",
+    display: "flex",
+    alignItems: "center",
+    width: SearchBarWidth
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    sx: {
-      position: "fixed",
-      display: "flex",
-      justifyContent: "center",
-      height: 100,
-      width: BoxWidth
-    },
+    sx: box_sx,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Paper__WEBPACK_IMPORTED_MODULE_5__["default"], {
       elevation: 24,
-      sx: {
-        margin: "20px auto",
-        display: "flex",
-        alignItems: "center",
-        width: SearchBarWidth
-      },
+      sx: paper_sx,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "\u691C\u7D22",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -35760,6 +35118,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+ // アイテムの並べ替えをするMenu
+// 0:  作成順
+// 1:  最新順
+// 2:  タイトル順
+// でSortする
 
 
 
@@ -35929,7 +35292,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // ログアウトボタン //
+ // ログアウトボタン
 
 
 
@@ -35953,7 +35316,7 @@ var LogOutButton = function LogOutButton() {
     sx: button_sx,
     children: "\u30ED\u30B0\u30A2\u30A6\u30C8"
   });
-}; // Navigation barのfooter部分 //
+}; // Navigation barのfooter部分
 // Navigation contentの下部分に常に配置
 // ログアウトができる
 
@@ -35992,11 +35355,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/grey.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/grey.js");
 /* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavBar */ "./resources/js/components/NavBar/NavBar.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -36004,36 +35367,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Navigation barのHeader部分 //
+ // Navigation barのHeader部分
 // プロダクト名を表示
 
 
 
 var NavBarHead = function NavBarHead() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    sx: {
-      width: _NavBar__WEBPACK_IMPORTED_MODULE_1__.NAV_BAR_WIDTH,
-      height: 120,
-      bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_4__["default"][600],
-      position: "fixed",
-      top: "0%",
-      left: "0%",
-      justifyContent: "center",
-      alignItems: "center",
-      display: "flex"
-    },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      component: react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link,
+  var box_sx = {
+    width: _NavBar__WEBPACK_IMPORTED_MODULE_1__.NAV_BAR_WIDTH,
+    height: 120,
+    bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_3__["default"][600],
+    position: "fixed",
+    top: "0%",
+    left: "0%",
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex"
+  };
+  var typo_sx = {
+    fontWeight: "bold",
+    fontSize: 30,
+    color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_4__["default"][900],
+    textDecoration: "none",
+    "&:hover": {
+      color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_4__["default"][900]
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    sx: box_sx,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      component: react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link,
       to: "/app/home",
-      sx: {
-        fontWeight: "bold",
-        fontSize: 30,
-        color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__["default"][900],
-        textDecoration: "none",
-        "&:hover": {
-          color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__["default"][900]
-        }
-      },
+      sx: typo_sx,
       children: "AniMane"
     })
   });
@@ -36081,11 +35446,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // Width of Navgation Bar //
+ // Width of Navgation Bar
 
 
 
-var NAV_BAR_WIDTH = 300; // Drwaerの表示制御 //
+var NAV_BAR_WIDTH = 300; // Drwaerの表示制御
 // メニューボタンを押すとNavigation Contentを表示し
 // 再度, メニューボタンを押すとNavigation Contentを閉じる
 
@@ -36103,7 +35468,7 @@ var DrawerHandleButton = function DrawerHandleButton(_ref) {
       }
     })
   });
-}; // Drwaerが表示された時の内容 //
+}; // Drwaerが表示された時の内容
 
 
 var DrawerContent = function DrawerContent(_ref2) {
@@ -36123,7 +35488,7 @@ var DrawerContent = function DrawerContent(_ref2) {
       color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_6__["default"][900]
     })]
   });
-}; // Navigation Bar Component //
+}; // Navigation Bar Component
 // メニューボタンを押すとNavigation Contentを表示し
 // 再度, メニューボタンを押すとNavigation Contentを閉じる
 
@@ -36204,7 +35569,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // Navgation BarのBody部分 //
+ // Navgation BarのBody部分
 // - フォルダ一覧表示機能
 // - フォルダの追加機能
 // - フォルダの検索機能 を実装
@@ -36247,7 +35612,6 @@ var NavBarBody = function NavBarBody() {
     dispatch({
       type: "handleReRenderOn"
     });
-    console.log("Refreshed folders");
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -36255,19 +35619,20 @@ var NavBarBody = function NavBarBody() {
     return function () {
       isMounted.current = false;
     };
-  });
+  }); // 表示するフォルダのセット
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (isMounted.current) {
       setFolders(state.all_folders);
     }
-  }, [state.all_folders]);
+  }, [state.all_folders]); // フォルダ検索欄に入力が行われた際に表示するフォルダの一覧のセット
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     if (!state.reRender && !state.isLoading) {
       var filtered_folders = state.all_folders.filter(function (folder) {
         return folder.name.toLowerCase().includes(value.toLowerCase());
       });
       setFolders(filtered_folders);
-      console.log("Search");
     }
   }, [value]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -36289,6 +35654,110 @@ var NavBarBody = function NavBarBody() {
 
 /***/ }),
 
+/***/ "./resources/js/components/NavBar/NavBarBody/ViewFolderList/LoadingFolder.js":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/NavBar/NavBarBody/ViewFolderList/LoadingFolder.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Skeleton */ "./node_modules/@mui/material/Skeleton/Skeleton.js");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../NavBar */ "./resources/js/components/NavBar/NavBar.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+ // フォルダのロード中に表示するコンポーネント
+
+
+
+var LoadingFolder = function LoadingFolder(_ref) {
+  var NavBarBody_h = _ref.NavBarBody_h;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    animation: "wave",
+    variant: "rectangular",
+    sx: {
+      width: _NavBar__WEBPACK_IMPORTED_MODULE_1__.NAV_BAR_WIDTH,
+      height: NavBarBody_h
+    }
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingFolder);
+
+/***/ }),
+
+/***/ "./resources/js/components/NavBar/NavBarBody/ViewFolderList/NotExitstFoders.js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/NavBar/NavBarBody/ViewFolderList/NotExitstFoders.js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
+/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../NavBar */ "./resources/js/components/NavBar/NavBar.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+ // フォルダが存在しない場合に表示するコンポーネント
+
+
+
+var NotExistFolders = function NotExistFolders(_ref) {
+  var NavBarBody_h = _ref.NavBarBody_h;
+  var textList = ["該当するフォルダーが存在しません", "(フォルダの作成を行ってください)"];
+  var box_sx = {
+    width: _NavBar__WEBPACK_IMPORTED_MODULE_1__.NAV_BAR_WIDTH,
+    height: NavBarBody_h,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  };
+  var grid_sx = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    sx: box_sx,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      container: true,
+      direction: "column",
+      sx: {
+        width: _NavBar__WEBPACK_IMPORTED_MODULE_1__.NAV_BAR_WIDTH
+      },
+      children: textList.map(function (text, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          container: true,
+          item: true,
+          sx: grid_sx,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            fontWeight: "bold",
+            children: text
+          })
+        }, index);
+      })
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NotExistFolders);
+
+/***/ }),
+
 /***/ "./resources/js/components/NavBar/NavBarBody/ViewFolderList/ViewFolderList.js":
 /*!************************************************************************************!*\
   !*** ./resources/js/components/NavBar/NavBarBody/ViewFolderList/ViewFolderList.js ***!
@@ -36301,26 +35770,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var react_window__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-window */ "./node_modules/react-window/dist/index.esm.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @mui/material/Skeleton */ "./node_modules/@mui/material/Skeleton/Skeleton.js");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
-/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
-/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
-/* harmony import */ var _mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/ListItemIcon */ "./node_modules/@mui/material/ListItemIcon/ListItemIcon.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_icons_material_Folder__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/icons-material/Folder */ "./node_modules/@mui/icons-material/Folder.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_window__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! react-window */ "./node_modules/react-window/dist/index.esm.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
+/* harmony import */ var _mui_material_ListItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/ListItem */ "./node_modules/@mui/material/ListItem/ListItem.js");
+/* harmony import */ var _mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @mui/material/ListItemButton */ "./node_modules/@mui/material/ListItemButton/ListItemButton.js");
+/* harmony import */ var _mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/ListItemIcon */ "./node_modules/@mui/material/ListItemIcon/ListItemIcon.js");
+/* harmony import */ var _mui_icons_material_Folder__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @mui/icons-material/Folder */ "./node_modules/@mui/icons-material/Folder.js");
 /* harmony import */ var _tool_EditFolder__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tool/EditFolder */ "./resources/js/components/NavBar/NavBarBody/tool/EditFolder.js");
 /* harmony import */ var _tool_DeleteFolder__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tool/DeleteFolder */ "./resources/js/components/NavBar/NavBarBody/tool/DeleteFolder.js");
-/* harmony import */ var _common_LoadingIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common/LoadingIcon */ "./resources/js/components/common/LoadingIcon.js");
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/grey.js");
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
-/* harmony import */ var _common_tool__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common/tool */ "./resources/js/components/common/tool.js");
-/* harmony import */ var _FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../FolderStatusManagement/FolderStatusManagement */ "./resources/js/components/FolderStatusManagement/FolderStatusManagement.js");
-/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../NavBar */ "./resources/js/components/NavBar/NavBar.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/grey.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
+/* harmony import */ var _common_tool__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common/tool */ "./resources/js/components/common/tool.js");
+/* harmony import */ var _FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../FolderStatusManagement/FolderStatusManagement */ "./resources/js/components/FolderStatusManagement/FolderStatusManagement.js");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../NavBar */ "./resources/js/components/NavBar/NavBar.js");
+/* harmony import */ var _NotExitstFoders__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NotExitstFoders */ "./resources/js/components/NavBar/NavBarBody/ViewFolderList/NotExitstFoders.js");
+/* harmony import */ var _LoadingFolder__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./LoadingFolder */ "./resources/js/components/NavBar/NavBarBody/ViewFolderList/LoadingFolder.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -36349,9 +35816,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-
- // フォルダ一覧を表示するコンポーネント //
+ // フォルダ一覧を表示するコンポーネント
 
 
 
@@ -36360,63 +35825,68 @@ var ViewFolderList = function ViewFolderList(_ref) {
   var folders = _ref.folders,
       handleReload = _ref.handleReload;
 
-  var _useWindowDimensions = (0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.useWindowDimensions)(),
+  var _useWindowDimensions = (0,_common_tool__WEBPACK_IMPORTED_MODULE_3__.useWindowDimensions)(),
       _ = _useWindowDimensions._,
       height = _useWindowDimensions.height;
 
   var NavBarBody_h = height - 290; // headerとfooterのheightを引いた残りの高さ
 
-  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_5__.FolderStatusManagementContext),
+  var _useContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(_FolderStatusManagement_FolderStatusManagement__WEBPACK_IMPORTED_MODULE_4__.FolderStatusManagementContext),
       _useContext2 = _slicedToArray(_useContext, 2),
       state = _useContext2[0],
-      dispatch = _useContext2[1];
+      dispatch = _useContext2[1]; // フォルダ一覧表示の各要素
+  // - フォルダの選択
+  // - フォルダの編集
+  // - フォルダの削除が可能
+
 
   var renderRow = function renderRow(_ref2) {
     var index = _ref2.index,
         style = _ref2.style;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_ListItem__WEBPACK_IMPORTED_MODULE_9__["default"], {
       style: style,
       component: "div",
       disablePadding: true,
-      secondaryAction: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tool_EditFolder__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      secondaryAction: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tool_EditFolder__WEBPACK_IMPORTED_MODULE_1__["default"], {
           folder: folders[index],
           handleReload: handleReload
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_tool_DeleteFolder__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_tool_DeleteFolder__WEBPACK_IMPORTED_MODULE_2__["default"], {
           folder: folders[index],
           handleReload: handleReload
         })]
       }),
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_11__["default"], {
         title: folders[index].name,
         placement: "bottom-end",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          component: react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Link,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(_mui_material_ListItemButton__WEBPACK_IMPORTED_MODULE_12__["default"], {
+          component: react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Link,
           to: "/app/home/folders/" + folders[index].id + "/items",
           sx: {
             "&:hover": {
-              color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_13__["default"][900]
+              color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_14__["default"][900]
             }
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_9__["default"], {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_icons_material_Folder__WEBPACK_IMPORTED_MODULE_14__["default"], {})
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_ListItemIcon__WEBPACK_IMPORTED_MODULE_10__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_icons_material_Folder__WEBPACK_IMPORTED_MODULE_15__["default"], {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
             component: "div",
             textOverflow: "ellipsis",
             overflow: "hidden",
             fontSize: 15,
-            width: _NavBar__WEBPACK_IMPORTED_MODULE_6__.NAV_BAR_WIDTH - 170,
+            width: _NavBar__WEBPACK_IMPORTED_MODULE_5__.NAV_BAR_WIDTH - 170,
             children: folders[index].name
           })]
         })
       })
     }, index);
-  };
+  }; // フォルダの一覧表示
+
 
   var FolderList = function FolderList() {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_window__WEBPACK_IMPORTED_MODULE_16__.FixedSizeList, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_window__WEBPACK_IMPORTED_MODULE_17__.FixedSizeList, {
       height: NavBarBody_h,
-      width: _NavBar__WEBPACK_IMPORTED_MODULE_6__.NAV_BAR_WIDTH,
+      width: _NavBar__WEBPACK_IMPORTED_MODULE_5__.NAV_BAR_WIDTH,
       itemSize: 50,
       itemCount: folders.length,
       overscanCount: 5,
@@ -36424,68 +35894,27 @@ var ViewFolderList = function ViewFolderList(_ref) {
     });
   };
 
-  var NotExistFolders = function NotExistFolders() {
-    var textList = ["該当するフォルダーが存在しません", "(フォルダの作成を行ってください)"];
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      sx: {
-        width: _NavBar__WEBPACK_IMPORTED_MODULE_6__.NAV_BAR_WIDTH,
-        height: NavBarBody_h,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_17__["default"], {
-        container: true,
-        direction: "column",
-        sx: {
-          width: _NavBar__WEBPACK_IMPORTED_MODULE_6__.NAV_BAR_WIDTH
-        },
-        children: textList.map(function (text, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_17__["default"], {
-            container: true,
-            item: true,
-            sx: {
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            },
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_18__["default"], {
-              fontWeight: "bold",
-              children: text
-            })
-          }, index);
-        })
+  var Main = function Main() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
+      children: folders.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(FolderList, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_NotExitstFoders__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        NavBarBody_h: NavBarBody_h
       })
     });
   };
 
-  var LoadingFolder = function LoadingFolder() {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Skeleton__WEBPACK_IMPORTED_MODULE_19__["default"], {
-      animation: "wave",
-      variant: "rectangular",
-      sx: {
-        width: _NavBar__WEBPACK_IMPORTED_MODULE_6__.NAV_BAR_WIDTH,
-        height: NavBarBody_h
-      }
-    });
+  var box_sx = {
+    width: _NavBar__WEBPACK_IMPORTED_MODULE_5__.NAV_BAR_WIDTH,
+    height: NavBarBody_h,
+    position: "fixed",
+    bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_18__["default"][100],
+    top: 230,
+    left: "0%"
   };
-
-  var Main = function Main() {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
-      children: folders.length ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(FolderList, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(NotExistFolders, {})
-    });
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_15__["default"], {
-    sx: {
-      width: _NavBar__WEBPACK_IMPORTED_MODULE_6__.NAV_BAR_WIDTH,
-      height: NavBarBody_h,
-      position: "fixed",
-      bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_20__["default"][100],
-      top: 230,
-      left: "0%"
-    },
-    children: state.isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(LoadingFolder, {}) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Main, {})
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_16__["default"], {
+    sx: box_sx,
+    children: state.isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_LoadingFolder__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      NavBarBody_h: NavBarBody_h
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Main, {})
   });
 };
 
@@ -36505,16 +35934,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_icons_material_CreateNewFolder__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/icons-material/CreateNewFolder */ "./node_modules/@mui/icons-material/CreateNewFolder.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_icons_material_CreateNewFolder__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/icons-material/CreateNewFolder */ "./node_modules/@mui/icons-material/CreateNewFolder.js");
 /* harmony import */ var _common_AddButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/AddButton */ "./resources/js/components/common/AddButton.js");
 /* harmony import */ var _common_Notification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Notification */ "./resources/js/components/common/Notification.js");
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/grey.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/grey.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../NavBar */ "./resources/js/components/NavBar/NavBar.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common_tool__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../common/tool */ "./resources/js/components/common/tool.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -36534,7 +35964,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // フォルダ追加機能 //
+
+ // フォルダ追加機能
 // フォルダの追加ボタンを押すと新しいフォルダ作成する画面が表示され
 // 閉じるまたは追加ボタンを押すと新しいフォルダ作成のキャンセルまたは新しいフォルダ作成が完了する
 // 入力は1字以上200字以下で制限する
@@ -36570,9 +36001,6 @@ var AddFolder = function AddFolder(_ref) {
       dispatch = _useContext2[1];
 
   var errorMessage = "1字以上200字以下で記入してください。";
-  var inputProps = {
-    maxLength: 200
-  };
 
   var handleErrorRefresh = function handleErrorRefresh() {
     setErrorText("");
@@ -36599,27 +36027,27 @@ var AddFolder = function AddFolder(_ref) {
     handleErrorRefresh();
   };
 
-  var value_validation = function value_validation(target_value) {
-    target_value = target_value.trim();
-
-    if (target_value.length <= inputProps.maxLength && target_value.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   var handleChange = function handleChange(e) {
     setValue(e.target.value);
 
-    if (value_validation(e.target.value)) {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_5__.value_validation)(e.target.value)) {
       handleErrorRefresh();
     } else {
       handleError(errorMessage);
     }
   };
 
-  var loadAfterAction = function loadAfterAction(payload) {
+  var handleSubmit = function handleSubmit() {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_5__.value_validation)(value)) {
+      createFolder();
+      handleClose();
+    } else {
+      handleError(errorMessage);
+    }
+  }; // API通信後に成功かエラーかを通知するための関数
+
+
+  var ApiAfterAction = function ApiAfterAction(payload) {
     dispatch({
       type: 'update_message',
       payload: payload
@@ -36640,43 +36068,31 @@ var AddFolder = function AddFolder(_ref) {
     }, {
       signal: abortCtrl.signal
     }).then(function () {
-      console.log("Success");
-      console.log(value.trim());
-      loadAfterAction("フォルダの作成が完了しました");
+      ApiAfterAction("フォルダの作成が完了しました");
     })["catch"](function () {
-      console.log("Fail to submit");
-      loadAfterAction("フォルダの作成に失敗しました");
+      ApiAfterAction("フォルダの作成に失敗しました");
     })["finally"](function () {
       clearTimeout(timeout);
     });
   };
 
-  var handleSubmit = function handleSubmit() {
-    if (value_validation(value)) {
-      createFolder();
-      handleClose();
-    } else {
-      handleError(errorMessage);
-    }
-  };
-
   var AddButton_sx = {
     width: _NavBar__WEBPACK_IMPORTED_MODULE_4__.NAV_BAR_WIDTH,
     height: 50,
-    bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_6__["default"][300],
+    bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__["default"][300],
     top: 180,
     left: "0%",
     position: "fixed",
     fontSize: 18,
     fontWeight: "bold",
-    color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__["default"][900],
+    color: _mui_material_colors__WEBPACK_IMPORTED_MODULE_8__["default"][900],
     "&:hover": {
-      bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_6__["default"][800]
+      bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_7__["default"][800]
     }
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_common_AddButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_icons_material_CreateNewFolder__WEBPACK_IMPORTED_MODULE_9__["default"], {}),
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_common_AddButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      startIcon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_mui_icons_material_CreateNewFolder__WEBPACK_IMPORTED_MODULE_10__["default"], {}),
       button_name: "\u30D5\u30A9\u30EB\u30C0\u306E\u8FFD\u52A0",
       task_name: "\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u306E\u4F5C\u6210",
       id: "new_folder_name",
@@ -36734,7 +36150,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // フォルダ削除機能 //
+ // フォルダ削除機能
 // フォルダの削除ボタンを押すと削除画面が表示され
 // 閉じるまたは削除ボタンを押すと削除のキャンセルまたは削除が完了する
 
@@ -36762,7 +36178,13 @@ var DeleteFolder = function DeleteFolder(_ref) {
     setOpen(false);
   };
 
-  var loadAfterAction = function loadAfterAction(payload) {
+  var handleSubmit = function handleSubmit() {
+    deleteFolder();
+    handleClose();
+  }; // API通信後に成功かエラーかを通知するための関数
+
+
+  var ApiAfterAction = function ApiAfterAction(payload) {
     dispatch({
       type: 'update_message',
       payload: payload
@@ -36781,20 +36203,12 @@ var DeleteFolder = function DeleteFolder(_ref) {
     axios__WEBPACK_IMPORTED_MODULE_3___default()["delete"]("/api/folders/".concat(folder.id), {
       signal: abortCtrl.signal
     }).then(function () {
-      console.log("Success");
-      loadAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u524A\u9664\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u524A\u9664\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
     })["catch"](function () {
-      console.log("Fail to delete");
-      loadAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u524A\u9664\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u524A\u9664\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
     })["finally"](function () {
       clearTimeout(timeout);
     });
-  };
-
-  var handleSubmit = function handleSubmit() {
-    console.log("Delete Folder key is ".concat(folder.id));
-    deleteFolder();
-    handleClose();
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -36828,12 +36242,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
 /* harmony import */ var _common_EditButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/EditButton */ "./resources/js/components/common/EditButton.js");
 /* harmony import */ var _common_Notification__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Notification */ "./resources/js/components/common/Notification.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common_tool__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common/tool */ "./resources/js/components/common/tool.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -36850,10 +36265,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  // フォルダ編集機能 //
 // フォルダの編集ボタンを押すとフォルダを編集する画面が表示され
 // 閉じるまたは編集ボタンを押すとフォルダ編集のキャンセルまたはフォルダ編集が完了する
-// 入力は1字以上100字以下で制限する
+// 入力は1字以上200字以下で制限する
 
 
 
@@ -36887,9 +36303,6 @@ var EditFolder = function EditFolder(_ref) {
       dispatch = _useContext2[1];
 
   var errorMessage = "1字以上200字以下で記入してください。";
-  var inputProps = {
-    maxLength: 200
-  };
 
   var handleErrorRefresh = function handleErrorRefresh() {
     setErrorText("");
@@ -36916,27 +36329,27 @@ var EditFolder = function EditFolder(_ref) {
     handleErrorRefresh();
   };
 
-  var value_validation = function value_validation(target_value) {
-    target_value = target_value.trim();
-
-    if (target_value.length <= inputProps.maxLength && target_value.length > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   var handleChange = function handleChange(e) {
     setValue(e.target.value);
 
-    if (value_validation(e.target.value)) {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(e.target.value)) {
       handleErrorRefresh();
     } else {
       handleError(errorMessage);
     }
   };
 
-  var loadAfterAction = function loadAfterAction(payload) {
+  var handleSubmit = function handleSubmit() {
+    if ((0,_common_tool__WEBPACK_IMPORTED_MODULE_4__.value_validation)(value)) {
+      updateFolder();
+      handleClose();
+    } else {
+      handleError(errorMessage);
+    }
+  }; // API通信後に成功かエラーかを通知するための関数
+
+
+  var ApiAfterAction = function ApiAfterAction(payload) {
     dispatch({
       type: 'update_message',
       payload: payload
@@ -36957,28 +36370,16 @@ var EditFolder = function EditFolder(_ref) {
     }, {
       signal: abortCtrl.signal
     }).then(function () {
-      console.log("Success");
-      console.log(value.trim());
-      loadAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u66F4\u65B0\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u66F4\u65B0\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F"));
     })["catch"](function () {
-      console.log("Fail to submit");
-      loadAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u66F4\u65B0\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
+      ApiAfterAction("\u30D5\u30A9\u30EB\u30C0(".concat(folder.name, ")\u306E\u66F4\u65B0\u306B\u5931\u6557\u3057\u307E\u3057\u305F"));
     })["finally"](function () {
       clearTimeout(timeout);
     });
   };
 
-  var handleSubmit = function handleSubmit() {
-    if (value_validation(value)) {
-      updateFolder();
-      handleClose();
-    } else {
-      handleError(errorMessage);
-    }
-  };
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_common_EditButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_common_EditButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
       task_name: "\u30D5\u30A9\u30EB\u30C0\u306E\u7DE8\u96C6",
       id: "edit folder",
       label: "\u65B0\u3057\u3044\u30D5\u30A9\u30EB\u30C0\u540D",
@@ -37014,12 +36415,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
+/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
 /* harmony import */ var _mui_material_Paper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @mui/material/Paper */ "./node_modules/@mui/material/Paper/Paper.js");
 /* harmony import */ var _mui_material_InputBase__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @mui/material/InputBase */ "./node_modules/@mui/material/InputBase/InputBase.js");
 /* harmony import */ var _mui_material_IconButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @mui/material/IconButton */ "./node_modules/@mui/material/IconButton/IconButton.js");
 /* harmony import */ var _mui_material_Tooltip__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @mui/material/Tooltip */ "./node_modules/@mui/material/Tooltip/Tooltip.js");
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/material/colors */ "./node_modules/@mui/material/colors/yellow.js");
 /* harmony import */ var _mui_icons_material_Search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @mui/icons-material/Search */ "./node_modules/@mui/icons-material/Search.js");
 /* harmony import */ var _mui_icons_material_Refresh__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @mui/icons-material/Refresh */ "./node_modules/@mui/icons-material/Refresh.js");
 /* harmony import */ var _common_ClearButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/ClearButton */ "./resources/js/components/common/ClearButton.js");
@@ -37035,7 +36436,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // フォルダ検索バー //
+ // フォルダ検索バー
 
 
 
@@ -37046,25 +36447,27 @@ var FolderSearchBar = function FolderSearchBar(_ref) {
       handleReload = _ref.handleReload,
       value = _ref.value;
   var SearchBarWidth = _NavBar__WEBPACK_IMPORTED_MODULE_2__.NAV_BAR_WIDTH - 50;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    sx: {
-      width: _NavBar__WEBPACK_IMPORTED_MODULE_2__.NAV_BAR_WIDTH,
-      height: 60,
-      justifyContent: "center",
-      alignItems: "start",
-      display: "flex",
-      bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_5__["default"][600],
-      top: 120,
-      left: "0%",
-      position: "fixed"
-    },
+  var box_sx = {
+    width: _NavBar__WEBPACK_IMPORTED_MODULE_2__.NAV_BAR_WIDTH,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "start",
+    display: "flex",
+    bgcolor: _mui_material_colors__WEBPACK_IMPORTED_MODULE_4__["default"][600],
+    top: 120,
+    left: "0%",
+    position: "fixed"
+  };
+  var paper_sx = {
+    p: "2px 4px",
+    display: "flex",
+    alignItems: "center",
+    width: SearchBarWidth
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    sx: box_sx,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_mui_material_Paper__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      sx: {
-        p: "2px 4px",
-        display: "flex",
-        alignItems: "center",
-        width: SearchBarWidth
-      },
+      sx: paper_sx,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_material_IconButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
         disabled: true,
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_mui_icons_material_Search__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -37154,8 +36557,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
- // Objectを追加するためのDialogを表示するボタン //
+ // Objectを追加するためのDialogを表示するボタン
 // Objectの追加ボタンを押すと新しいObject作成する画面が表示され
 // 閉じるまたは追加ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
 // @button_name: ボタンに表示する文字
@@ -37182,8 +36584,7 @@ var AddButton = function AddButton(_ref) {
       sx = _ref.sx;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_3__["default"], {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_mui_material_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      startIcon: startIcon // component={ Typography }
-      ,
+      startIcon: startIcon,
       onClick: handleClickOpen,
       sx: sx,
       children: button_name
@@ -37231,7 +36632,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Objectを追加するためのDialogを表示するボタン //
+ // Objectを追加するためのDialogを表示するボタン
 // Objectの追加ボタンを押すと新しいObject作成する画面が表示され
 // 閉じるまたは追加ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
 
@@ -37303,7 +36704,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // 入力のクリアボタン //
+ // 入力のクリアボタン
 // ボタンを押すと入力内容がクリアされる
 
 
@@ -37351,7 +36752,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Objectの削除を行う画面を表するためのボタン //
+ // Objectの削除を行う画面を表するためのボタン
 // ボタンを押すと削除画面を表示し
 // 再度, ボタンを押すと閉じる
 
@@ -37434,7 +36835,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // Object削除の確認Dialog //
+ // Object削除の確認Dialog
 // 閉じるを押せば削除キャンセル
 // 削除を押せば選択objectを削除
 // @content_text: Dialogに表示する説明文
@@ -37508,7 +36909,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Objectの編集を行う画面を表するためのボタン //
+ // Objectの編集を行う画面を表するためのボタン
 // ボタンを押すと編集画面を表示し
 // 再度, ボタンを押すと閉じる
 
@@ -37589,7 +36990,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // Objectの追加・編集する画面 //
+ // Objectの追加・編集する画面
 // Objectの追加・編集ボタンを押すと新しいObject作成する画面が表示され
 // 閉じるまたは追加・編集ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
 // @task_name: 実行するtask  (例: 新しいフォルダの作成)
@@ -37654,72 +37055,6 @@ var EditDialog = function EditDialog(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/common/LoadingIcon.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/components/common/LoadingIcon.js ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _mui_material_Box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @mui/material/Box */ "./node_modules/@mui/material/Box/Box.js");
-/* harmony import */ var _mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @mui/material/Typography */ "./node_modules/@mui/material/Typography/Typography.js");
-/* harmony import */ var _mui_material_Grid__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mui/material/Grid */ "./node_modules/@mui/material/Grid/Grid.js");
-/* harmony import */ var _mui_lab_LoadingButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mui/lab/LoadingButton */ "./node_modules/@mui/lab/LoadingButton/LoadingButton.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-
-
-
-var LoadingIcon = function LoadingIcon(_ref) {
-  var sx = _ref.sx;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    sx: sx,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      container: true,
-      direction: "column",
-      spacing: 2,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        container: true,
-        item: true,
-        sx: {
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_lab_LoadingButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          loading: true,
-          fontSize: "large"
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        container: true,
-        item: true,
-        sx: {
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center"
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          fontWeight: "bold",
-          children: "\u30ED\u30FC\u30C9\u4E2D..."
-        })
-      })]
-    })
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadingIcon);
-
-/***/ }),
-
 /***/ "./resources/js/components/common/Notification.js":
 /*!********************************************************!*\
   !*** ./resources/js/components/common/Notification.js ***!
@@ -37760,20 +37095,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+ // API通信時におけるStateの通知
+// 例: フォルダの読み込みに失敗した場合 => フォルダの読み込みに失敗しました とSnackBarで通知をする
 
 
 
-var initialState = {
-  isNotice: false,
-  NoticeMessage: ""
-};
-var NoticeContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(initialState);
 
 var SlideTransition = function SlideTransition(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Slide__WEBPACK_IMPORTED_MODULE_2__["default"], _objectSpread(_objectSpread({}, props), {}, {
     direction: "up"
   }));
 };
+
+var initialState = {
+  isNotice: false,
+  NoticeMessage: ""
+};
+var NoticeContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(initialState);
 
 var Notification = function Notification(_ref) {
   var children = _ref.children;
@@ -37876,6 +37214,11 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+ // アイテムの並べ替えStateを管理する
+// 0:  作成順
+// 1:  最新順
+// 2:  タイトル順
+// でSortする
 
 
 var initialState = {
@@ -37920,9 +37263,11 @@ var SortManagement = function SortManagement(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "useWindowDimensions": () => (/* binding */ useWindowDimensions)
+/* harmony export */   "useWindowDimensions": () => (/* binding */ useWindowDimensions),
+/* harmony export */   "value_validation": () => (/* binding */ value_validation)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Notification__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Notification */ "./resources/js/components/common/Notification.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -37934,6 +37279,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
  // 画面のwidthとheightを取得する関数 //
 
@@ -37964,6 +37310,15 @@ var useWindowDimensions = function useWindowDimensions() {
     };
   }, []);
   return windowDimensions;
+}; // フォルダとアイテムの追加・更新時に行う入力値のバリデーション
+//  1文字以上200以内で制限する
+
+var inputProps = {
+  maxLength: 200
+};
+var value_validation = function value_validation(target_value) {
+  target_value = target_value.trim();
+  return target_value.length <= inputProps.maxLength && target_value.length > 0 ? true : false;
 };
 
 /***/ }),
@@ -38003,7 +37358,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
- // /app/home/:folderId/itemsの画面へ出力する要素 //
+ // /app/home/:folderId/itemsの画面へ出力する要素
 // folderIdによって選択されたフォルダに関連するItems一覧を表示
 
 
@@ -38061,20 +37416,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // /app/homeのフォルダ未選択時の画面へ出力する要素 //
 
 
 
+var box_sx = {
+  width: "100%",
+  height: "100vh",
+  justifyContent: "center",
+  alignItems: "center",
+  display: "flex"
+};
+/*** /app/homeのフォルダ未選択時の画面へ出力する要素 ***/
 
 var Home = function Home() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_mui_material_Box__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    sx: {
-      width: "100%",
-      height: "100vh",
-      justifyContent: "center",
-      alignItems: "center",
-      display: "flex"
-    },
+    sx: box_sx,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(_mui_material_Grid__WEBPACK_IMPORTED_MODULE_3__["default"], {
       container: true,
       direction: "column",

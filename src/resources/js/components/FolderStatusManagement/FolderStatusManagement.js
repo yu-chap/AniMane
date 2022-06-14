@@ -2,6 +2,11 @@ import React, { createContext, useReducer, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NoticeContext } from '../common/Notification';
 
+// フォルダの読み込み管理
+// Mountされた時点でフォルダ一覧の読み込みを開始し
+// reRenderがtrueになるたびにフォルダの再読み込みを行う
+// @current_folderIdで現在選択されているフォルダを管理する
+
 const initialState = {
     reRender: true,
     isLoading: true,

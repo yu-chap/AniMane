@@ -9,7 +9,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { FolderStatusManagementContext } from '../FolderStatusManagement/FolderStatusManagement';
 
-// Object削除の確認Dialog //
+// Object削除の確認Dialog
 // 閉じるを押せば削除キャンセル
 // 削除を押せば選択objectを削除
 // @content_text: Dialogに表示する説明文
@@ -28,9 +28,9 @@ const DeleteAlertDialog = ({ task_name, content_text, open, handleClose, handleS
                 <DialogActions>
                     <Button onClick={ handleClose }>閉じる</Button>
                     {
-                        (state.current_folderId === String(folder_key)) ?
-                        <Button component={ Link } to="/app/home" onClick={ handleSubmit }>削除</Button> :
-                        <Button onClick={ handleSubmit }>削除</Button>
+                        (state.current_folderId === String(folder_key))
+                        ?   <Button component={ Link } to="/app/home" onClick={ handleSubmit }>削除</Button>
+                        :   <Button onClick={ handleSubmit }>削除</Button>
                     }
                 </DialogActions>
             </Dialog>

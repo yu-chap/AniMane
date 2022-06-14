@@ -8,7 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import ClearButton from './ClearButton';
 
-// Objectの追加・編集する画面 //
+// Objectの追加・編集する画面
 // Objectの追加・編集ボタンを押すと新しいObject作成する画面が表示され
 // 閉じるまたは追加・編集ボタンを押すと新しいObject作成のキャンセルまたは新しいObject作成が完了する
 // @task_name: 実行するtask  (例: 新しいフォルダの作成)

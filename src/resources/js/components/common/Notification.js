@@ -4,16 +4,19 @@ import Slide from '@mui/material/Slide';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 
+// API通信時におけるStateの通知
+// 例: フォルダの読み込みに失敗した場合 => フォルダの読み込みに失敗しました とSnackBarで通知をする
+
+const SlideTransition = (props) => {
+    return <Slide {...props} direction="up" />;
+}
+
 const initialState = {
     isNotice: false,
     NoticeMessage: "",
 };
 
 export const NoticeContext = createContext(initialState);
-
-const SlideTransition = (props) => {
-    return <Slide {...props} direction="up" />;
-}
 
 const Notification = ({ children }) => {
 

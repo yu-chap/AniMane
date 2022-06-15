@@ -47,7 +47,7 @@
 ###### その他
 - AWS(EC2, RDS, Route53, ALB)
 - Docker/Docker-compose
-- Circle CI/CD
+- CircleCI CI/CD
 
 ###### コードの格納場所
 主要コードは以下に格納してある.

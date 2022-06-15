@@ -1,6 +1,6 @@
 # AniMane
 
-アニメ管理アプリ.
+アニメ管理アプリ([AniMane](https://animane.tk/)).
 
 自分の好きなフォルダを作成し各フォルダごとにアニメを管理できる.
 
@@ -45,9 +45,9 @@
 - Nginx 1.20.2
 
 ###### その他
-- AWS(EC2, RDS, Route53, ALB, Elastic IP)
+- AWS(EC2, RDS, Route53, ALB)
 - Docker/Docker-compose
-- Circkle CI/CD
+- Circle CI/CD
 
 ###### コードの格納場所
 主要コードは以下に格納してある.
@@ -59,9 +59,32 @@
 ## 設計
 ### インフラ構成図
 ![Infra Image](/images/Infra.jpg)
+- githubにpushされた時に, テストが自動で実行される
+- main branchへのpush時にはテストが自動で実行され, 成功すればEC2への自動デプロイを行う
 ### データベース設計
 ![Database Design](/images/database_design.jpg)
 ### URL設計
+
+###### フロントエンド
+
+| URL | Description |
+| --- | --- |
+| /app/home | ホーム画面 |
+| /app/home/folders/:folderId/items| 選択されたフォルダのアイテム一覧表示画面 |
+
+###### バックエンド
+
+| URL | Method | Description |
+| --- | --- |
+| /api/folders | GET | フォルダ一覧を取得 |
+| /api/folders | POST | 新しいフォルダの作成 |
+| /api/folders/{folder} | PUT | フォルダの更新 |
+| /api/folders/{folder} | DELETE | フォルダの削除 |
+| /api/folders/{folder}/items | GET | 選択されたフォルダに関連するアイテムの取得 |
+| /api/folders/{folder}/items/search | GET | フォルダ内検索 |
+| /api/folders/{folder}/items | POST | 新しいアイテムの作成 |
+| /api/folders/{folder}/items/{item} | PUT | アイテムの更新 |
+| /api/folders/{folder}/items/{item} | DELETE | アイテムの削除 |
 
 ## テスト
 基本的な機能のテストとエラー関係のテストを行った.
@@ -77,12 +100,12 @@
 ## 今後
 管理するアニメの増加により, 普通のメモアプリでは構造的な管理ができないという課題を解決するために, フォルダによって構造的に管理できるよう本アプリを開発した.しかしながら, 作成してみると使いづらさや想定できていなかったところが見つかった. したがって, 今後もそれらの改善を行っていく予定である.
 ###### 改善予定一覧
-- [] 入力のsubmitをEnterでできるようにする
-- [] フォルダ選択画面の現在選択されたフォルダの表示
-- [] Searchバーのボタン化(常時表示するのをやめる)
-- [] ユーザー削除機能
-- [] user nameの表示
-- [] メールによる再設定
-- [] Reactテストの自動化
-- [] タグ機能の追加
-- [] ランキング機能の追加
+- [ ] 入力のsubmitをEnterでできるようにする
+- [ ] フォルダ選択画面の現在選択されたフォルダの表示
+- [ ] Searchバーのボタン化(常時表示するのをやめる)
+- [ ] ユーザー削除機能
+- [ ] user nameの表示
+- [ ] メールによる再設定
+- [ ] Reactテストの自動化
+- [ ] タグ機能の追加
+- [ ] ランキング機能の追加

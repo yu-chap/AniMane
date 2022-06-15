@@ -75,7 +75,7 @@
 ###### バックエンド
 
 | URL | Method | Description |
-| --- | --- |
+| --- | --- | --- |
 | /api/folders | GET | フォルダ一覧を取得 |
 | /api/folders | POST | 新しいフォルダの作成 |
 | /api/folders/{folder} | PUT | フォルダの更新 |

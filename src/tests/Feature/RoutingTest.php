@@ -17,25 +17,25 @@ class RoutingTest extends TestCase
         $this->user = User::factory()->create();
     }
 
-    // ゲストユーザーはtopページへアクセス可能
-    public function test_GuestUser_can_see_top()
+    // 未認証ユーザーはtopページへアクセス可能
+    public function test_unAuthUser_can_see_top()
     {
         $response = $this->get('/');
         $response->assertOk();
-        $response->assertViewIs('.top.index');
+        $response->assertViewIs('top.index');
     }
 
     // すでにログインしたユーザーはtopページではなく/app/homeへ転送
-    public function test_LoginUser_can_be_redirected_to_home()
+    public function test_AuthUser_can_be_redirected_to_home()
     {
         $response = $this->actingAs($this->user)->get('/');
         $response->assertStatus(302);
         $response->assertRedirect('/app/home');
     }
 
-    // ゲストユーザーは/app/homeにアクセスできない
+    // 未認証ユーザーは/app/homeにアクセスできない
     // その場合, ログインを要求
-    public function test_GuestUser_cannot_access_home()
+    public function test_unAuthUser_cannot_access_home()
     {
         $response = $this->get('/app/home');
         $response->assertStatus(302);

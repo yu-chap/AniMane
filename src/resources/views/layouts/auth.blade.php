@@ -30,6 +30,12 @@
                                 <a class="nav-link" href="{{ route('login') }}">ログイン</a>
                             </li>
                         @endif
+
+                        @if (Route::has('guestLogin'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('guestLogin') }}">ゲストログイン</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

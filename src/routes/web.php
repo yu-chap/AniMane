@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Api\FolderController;
 use App\Http\Controllers\Api\ItemController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use App\Http\Controllers\Api\ItemController;
 */
 
 Route::get('/', [PageController::class, 'TopPage_Routing'])->name('top');
+Route::get('/guest', [LoginController::class, 'guestLogin'])->name('guestLogin');
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {

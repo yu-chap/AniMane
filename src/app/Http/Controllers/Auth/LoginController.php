@@ -47,7 +47,7 @@ class LoginController extends Controller
             return redirect()->to('/app/home');
         }
         else {
-            return view('/top/index');
+            return redirect()->to('/');
         }
     }
 }

@@ -6,7 +6,7 @@
 
 ユーザーエクスペリエンス向上のためSingle Page Applicationを実装した.
 
-![Top Page](/images/top_page.jpg)
+![Top Page](/images/top.jpg)
 ![Navigation](/images/Navigation.jpg)
 ![ItemList](/images/itemList.jpg)
 ## 作成に至る経緯

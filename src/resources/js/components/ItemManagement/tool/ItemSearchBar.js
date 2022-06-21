@@ -8,6 +8,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import ClearButton from '../../common/ClearButton';
 import { getBoxWidth, getSearchBarWidth } from './tool';
+import { pressEnter } from '../../common/tool';
 
 // フォルダ内アイテム検索バー
 const ItemSearchBar = ({ handleChange, handleRefresh, handleReload, handleSubmit, value }) => {
@@ -37,6 +38,7 @@ const ItemSearchBar = ({ handleChange, handleRefresh, handleReload, handleSubmit
                     placeholder="フォルダ内検索"
                     value={ value }
                     onChange={ handleChange }
+                    onKeyDown={ (e) => { pressEnter(e, handleSubmit); } }
                 />
                 { (value === "") ? null : <ClearButton title="検索のクリア" handleRefresh={ handleRefresh } /> }
                 <Tooltip title="アニメの再読み込み" placement="bottom"><IconButton onClick={ handleReload }><RefreshIcon /></IconButton></Tooltip>

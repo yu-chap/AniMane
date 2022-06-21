@@ -13,6 +13,7 @@ const EditButton = ({ task_name, id, label, open, error, errorText, handleClickO
             <IconButton
                 onClick={ handleClickOpen }
                 aria-label={ aria_label }
+                disableFocusRipple={ true }
                 size={ size }
                 sx={ sx }
             >

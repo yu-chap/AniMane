@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import ClearButton from './ClearButton';
+import { pressEnter } from './tool';
 
 // Objectの追加・編集する画面
 // Objectの追加・編集ボタンを押すと新しいObject作成する画面が表示され
@@ -29,6 +30,7 @@ const EditDialog = ({ task_name, id, label, open, error, errorText, handleChange
                         helperText={ errorText }
                         error={ error }
                         onChange={ handleChange }
+                        onKeyDown={ (e) => { pressEnter(e, handleSubmit); } }
                         value={ value }
                         InputProps={{ endAdornment: (value === "") ? null : <ClearButton title="入力のクリア" handleRefresh={ handleRefresh } fontSize="small" /> }}
                     />

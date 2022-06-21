@@ -98,6 +98,7 @@ const AddFolder = ({ handleReload }) => {
         fontSize: 18,
         fontWeight: "bold",
         color: grey[900],
+        borderRadius: 0,
         "&:hover": { bgcolor: yellow[800] },
     };
 

@@ -13,6 +13,7 @@ const DeleteButton = ({ task_name, content_text, open, handleClickOpen, handleCl
             <IconButton
                 onClick={ handleClickOpen }
                 aria-label={ aria_label }
+                disableFocusRipple={ true }
                 size={ size }
                 sx={ sx }
             >

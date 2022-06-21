@@ -13,6 +13,7 @@ const AddButton = ({ startIcon, button_name, task_name, id, label, open, error, 
             <Button
                 startIcon={ startIcon }
                 onClick={ handleClickOpen }
+                disableFocusRipple={ true }
                 sx={ sx }
             >
                 { button_name }

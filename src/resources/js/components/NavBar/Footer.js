@@ -15,6 +15,7 @@ const LogOutButton = () => {
         fontSize: 20,
         fontWeight: "bold",
         color: grey[900],
+        borderRadius: 0,
         "&:hover": { bgcolor: yellow[800] },
     };
 

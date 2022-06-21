@@ -14,6 +14,7 @@ const AddIconButton = ({ task_name, id, label, open, error, errorText, handleCli
             <Tooltip title={ task_name }>
                 <IconButton
                     onClick={ handleClickOpen }
+                    disableFocusRipple={ true }
                     sx={ sx }
                 >
                     <AddIcon />

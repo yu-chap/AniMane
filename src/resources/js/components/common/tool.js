@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
-import { NoticeContext } from './Notification';
+import { useState, useEffect } from 'react';
 
 // 画面のwidthとheightを取得する関数 //
 export const useWindowDimensions = () => {
@@ -31,4 +30,12 @@ const inputProps = {
 export const value_validation = (target_value) => {
     target_value = target_value.trim();
     return (target_value.length <= inputProps.maxLength && target_value.length > 0) ? true : false;
+}
+
+// Enter入力の判定
+export const pressEnter = (e, handleSubmit) => {
+    if(e.key === "Enter") {
+        e.preventDefault();
+        handleSubmit();
+    }
 }
